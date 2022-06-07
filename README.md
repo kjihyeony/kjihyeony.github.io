@@ -1,16 +1,24 @@
-### Hi there 👋
+# heony
 
-<!--
-**kjihyeony/kjihyeony** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+## Project setup
+```
+yarn install
+```
 
-Here are some ideas to get you started:
+### Compiles and hot-reloads for development
+```
+yarn serve
+```
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+### Compiles and minifies for production
+```
+yarn build
+```
+
+### Lints and fixes files
+```
+yarn lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).

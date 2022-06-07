@@ -1,0 +1,17 @@
+$text-color : #222;
+$link-color : rgb(9, 113, 241);
+$riot-blue: #0bc6e3;
+$riot-yellow : #c4b998;
+$input-text-inactive: #7881A1;
+$input-text-active: #BFD2FF;
+
+/* 애니메이션 */
+@keyframes gradient {
+    0% {
+        background-position: 0 0
+    }
+
+    100% {
+        background-position: 100% 0
+    }
+}
