@@ -14,12 +14,11 @@ import Event from './routes/Event'
 
 function App() {
 
-  let [shoes] = useState(data)
+  let [shoes,슈즈변경] = useState(data)
   let navigate = useNavigate();
 
   return (
     <div>
-
       <Navbar bg="light" variant="light">
         <Container>
         <Navbar.Brand href="#home">Navbar</Navbar.Brand>
@@ -30,6 +29,12 @@ function App() {
         </Container>
       </Navbar>
 
+      <div><button onClick={ ()=>{
+        let copy = [...shoes];
+          copy.sort( (a, b) => a.title < b.title ? - 1 :((a.title > b.title) ? 1 : 0 ) );
+          슈즈변경(copy);
+      } }>소팅버튼</button></div>
+
       <Routes>
         <Route path="/" element={
           <>
@@ -38,29 +43,31 @@ function App() {
               {
                 shoes.map((a, i)=>{
                   return(
-                    <Items key="i" shoes={shoes[i]}/>
+                    <Items key={i} shoes={shoes[i]}/>
                   )
                 })
               }
             </div>
           </>
          } />
-        <Route path="/detail" element={
-          <>
-          <Detail></Detail>
-          </> } />
 
-        <Route path="/about" element={<About /> } >
-          <Route path="member" element={<div>멤버상세123</div> } />
-        </Route>
+          {/* about */}
+          <Route path="/detail/:id" element={
+            <Detail shoes={shoes}></Detail>
+          } />
 
+          {/* about */}
+          <Route path="/about" element={<About /> } >
+            <Route path="member" element={<div>멤버상세123</div> } />
+          </Route>
 
-        <Route path="/event" element={<Event /> } >
-          <Route path="one" element={<div>첫주문시 어쩌고</div> } />
-          <Route path="two" element={<div>두번째주문시 어쩌고</div> } />
-        </Route>
+          {/* event */}
+          <Route path="/event" element={<Event /> } >
+            <Route path="one" element={<div>첫주문시 어쩌고</div> } />
+            <Route path="two" element={<div>두번째주문시 어쩌고</div> } />
+          </Route>
 
-        <Route path="*" element={<div> 404 </div> } />
+          <Route path="*" element={<div> 404 </div> } />
         </Routes>
   </div>
   );
@@ -72,7 +79,7 @@ function Items(props){
       <Card.Img variant="top" src={ bg2 } />
       <Card.Body>
         <Card.Title>{props.shoes.title}</Card.Title>
-        <Card.Text>ㄴ
+        <Card.Text>
           Some quick example text to build on the card title and make up the bulk of
           the card's content.
         </Card.Text>
