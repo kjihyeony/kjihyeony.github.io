@@ -8,6 +8,7 @@ import data from './data.js';
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom'
 import Detail from './routes/Detail'
 import Event from './routes/Event'
+import axios from 'axios'
 
 
 
@@ -26,14 +27,16 @@ function App() {
           <Nav.Link onClick={()=>{navigate('/')}}>홈이동</Nav.Link>
           <Nav.Link onClick={()=>{navigate('/detail')}} >Detail</Nav.Link>
         </Nav>
+        <div>
+            <button onClick={ ()=>{
+            let copy = [...shoes];
+              copy.sort( (a, b) => a.title < b.title ? - 1 :((a.title > b.title) ? 1 : 0 ) );
+              슈즈변경(copy);
+          } }>btn a</button>
+        </div>
         </Container>
       </Navbar>
 
-      <div><button onClick={ ()=>{
-        let copy = [...shoes];
-          copy.sort( (a, b) => a.title < b.title ? - 1 :((a.title > b.title) ? 1 : 0 ) );
-          슈즈변경(copy);
-      } }>소팅버튼</button></div>
 
       <Routes>
         <Route path="/" element={
@@ -48,6 +51,22 @@ function App() {
                 })
               }
             </div>
+            <button onClick={()=>{
+              //로딩중 ui 띄우기
+
+              axios.get('https://codingapple1.github.io/shop/data2.json')
+              .then((결과)=>{
+                console.log(결과.data);
+                console.log(shoes);
+                let  shoeCopy = [...shoes, ...결과.data];
+                슈즈변경(shoeCopy);
+                //로딩중 ui 숨기기
+              })
+              .catch(()=>{
+                console.log("실패");
+              })
+            }}>
+            버튼</button>
           </>
          } />
 
