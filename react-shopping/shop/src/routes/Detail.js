@@ -19,6 +19,8 @@ function Detail(props){
   let[textValid, setTextVaild] = useState(false);
   let[탭, 탭변경] = useState(0);
 
+  let [fade2, setFade2] = useState('')
+
   //mount, update시 실행
   //html렌더링 후 동작
   useEffect(()=>{
@@ -31,8 +33,15 @@ function Detail(props){
 
   },[text])
 
+  useEffect(()=>{
+    setFade2('end')
+    return()=>{
+      setFade2('');
+    }
+  },[])
+
   return (
-    <div className="container">
+    <div className={'container start ' + fade2}>
       {
         alert2 == true
         ?  <div className='alert alert-warning'>2초안에 박스삭제</div>
@@ -83,15 +92,21 @@ function Detail(props){
 }
 
 function TabContent({탭}){
-  if( 탭 == 0){
-    return <div>내용0</div>
-  }
-  if( 탭 == 1){
-    return <div>내용1</div>
-  }
-  if ( 탭 == 2){
-    return <div>내용2</div>
-  }
+
+  let [fade, setFade] = useState('')
+
+  useEffect(()=>{
+    setTimeout(()=>{ setFade('end') }, 100)
+      return ()=>{
+        setFade('')
+      }
+    }, [탭])
+
+  return (
+    <div className={'start ' + fade}>
+      { [<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][탭] }
+    </div>
+  )
 }
 
 export default Detail;
