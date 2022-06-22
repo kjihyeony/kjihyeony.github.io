@@ -107,7 +107,7 @@ function TabContent({탭}){
 
   return (
     <div className={'start ' + fade}>
-      { [<div>내용0</div>, <div>내용1</div>, <div>내용2</div>][탭] }
+      { [<div></div>, <div>내용1</div>, <div>내용2</div>][탭] }
     </div>
   )
 }
