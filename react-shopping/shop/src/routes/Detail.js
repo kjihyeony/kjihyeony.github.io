@@ -1,12 +1,15 @@
 import { useParams } from 'react-router-dom';
 import {Nav} from 'react-bootstrap';
 import bg2 from '../img/bg2.avif';
-import {useState} from 'react';
+import {useContext, useState} from 'react';
 import styled from 'styled-components'
 import React, { useEffect } from 'react';
 
+import {Context1} from './../App'
+
 
 function Detail(props){
+  let {재고, shoes} =  useContext(Context1)
 
   let[alert2, setAlert] = useState(true);
 
@@ -51,7 +54,7 @@ function Detail(props){
         <div className="container w-100 justify-content-center">
 
           <div className="row align-items-center">
-
+{재고}
             <div className="col-md-6">
               <img src={bg2} width="100%" />
             </div>

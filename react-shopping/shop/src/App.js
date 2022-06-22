@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {createContext, useState} from 'react';
 import {Button, Navbar, Container, Nav, Card} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -10,12 +10,14 @@ import Detail from './routes/Detail'
 import Event from './routes/Event'
 import axios from 'axios'
 
-
-
+export let Context1 = createContext()
 
 function App() {
 
+
   let [shoes,슈즈변경] = useState(data)
+  let [재고] = useState([10, 11, 12])
+
   let navigate = useNavigate();
 
   return (
@@ -72,7 +74,9 @@ function App() {
 
           {/* about */}
           <Route path="/detail/:id" element={
-            <Detail shoes={shoes}></Detail>
+            <Context1.Provider value={{ 재고, shoes}}>
+              <Detail shoes={shoes}></Detail>
+            </Context1.Provider>
           } />
 
           {/* about */}
