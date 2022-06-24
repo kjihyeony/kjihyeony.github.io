@@ -1,0 +1,29 @@
+.Header {
+  padding: 8px 20px;
+  background-color: black;
+  color: #fff;
+
+  &-inner {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.Gnb {
+  display: flex;
+  align-items: center;
+  padding-right: 5em;
+
+  &-item{
+    display: block;
+    list-style: none;
+
+    a {
+      color: gray;
+      text-decoration: none;
+    }
+    &+& {
+      margin-left: 1rem;
+    }
+  }
+}
