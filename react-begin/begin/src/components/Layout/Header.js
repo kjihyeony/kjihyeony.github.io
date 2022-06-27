@@ -9,7 +9,7 @@ background: wheat;
 }
 
 @media ${Theme.laptop} {
-  background: blue;
+  background: black;
 }
 
 
