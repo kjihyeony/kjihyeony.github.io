@@ -17,7 +17,7 @@ background: wheat;
 
 const Header = () => {
   return(
-    <header className="Header"  Theme={Theme}>
+    <header className="Header"  theme={Theme}>
       <HeaderWrap>
         <div className="Header-inner">
           <h1>SDC Header</h1>

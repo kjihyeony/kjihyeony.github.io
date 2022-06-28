@@ -3,6 +3,8 @@ import styled, { css, ThemeProvider } from 'styled-components';
 import Button from './Button';
 import Card from './Card';
 import Dialog from './Dialog';
+import Media from './Media';
+
 
 const Compo = styled.div`
   padding: 10px;
@@ -20,17 +22,22 @@ const Box = styled.div`
 `;
 
 const StyleCardWrap = styled.div `
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 20px;
+    display: block;
+
+    ${Media.tab`
+       display: flex;
+       align-items: center;
+       justify-content: space-between;
+       padding: 0 20px;
+    `}
 `;
 
 
 const Main = () => {
-  const [dialog, setDialog] = useState(false)
+  const [dialog, setDialog] = useState(false);
   const onClick = () => {
     setDialog(true);
+    console.log('클릭');
   };
   const onConfirm = ()=> {
     console.log('확인');
@@ -41,13 +48,11 @@ const Main = () => {
     setDialog(false);
   };
 
-
   return (
     <div>
       <h1>Phase1 Main</h1>
       <p>Pahse1 페이지</p>
       <Compo color="red">
-       하하하
         <Button size="large">이거슨 버튼</Button>
         <Button color="gray">이거슨 버튼</Button>
         <Button size="small" color="pink">이거슨 버튼</Button>
@@ -55,38 +60,40 @@ const Main = () => {
       </Compo>
 
       <Box>
+      <button onClick={onClick}>Show name</button> 
+
         <Button size="large" fullWidth color="gray" onClick={onClick}>안녕 누르면 팝업</Button>
         <ThemeProvider
           theme={{
             palette: {
-            blue: '#228be6',
-            gray: '#495057',
-            pink: '#f06595'
+              blue: '#228be6',
+              gray: '#495057',
+              pink: '#f06595'
             }
           }}
         >
-          <>
-            <StyleCardWrap>
-              <Card />
-              <Card color="pink"  />
-              <Card />
-            </StyleCardWrap>
-            <Dialog
-                title="정말로 삭제하시겠습니까?"
-                confirmText="삭제"
-                cancelText="취소"
-                onConfirm={onConfirm}
-                onCancle={onCancle}
-                visible={dialog}
-              >
-              데이터를 정말로 삭제하시겠습니까?
-            </Dialog>
-          </>
+  
+          <StyleCardWrap>
+            <Card />
+            <Card color="pink"  />
+            <Card />
+          </StyleCardWrap>
+          <Dialog
+              title="정말로 삭제하시겠습니까?"
+              confirmText="삭제"
+              cancelText="취소"
+              onConfirm={onConfirm}
+              onCancle={onCancle}
+              visible={dialog}
+            >
+            데이터를 정말로 삭제하시겠습니까?
+          </Dialog>
         </ThemeProvider>
       </Box>
 
     </div>
   );
+  
 };
 
 export default Main;

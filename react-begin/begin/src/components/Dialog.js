@@ -1,6 +1,24 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import Button from './Button'
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0
+  }
+  to {
+    opacity: 1
+  }
+`;
+
+const slideUp = keyframes`
+  from {
+    transform: translateY(200px);
+  }
+  to {
+    transform: translateY(0px);
+  }
+`;
 
 const DarkBackground = styled.div`
   position: fixed;
@@ -12,6 +30,11 @@ const DarkBackground = styled.div`
   align-items: center;
   justify-content: center;
   background: rgba(0, 0, 0, 0.8);
+
+  animation-duration: 0.25s;
+  animation-timing-function: ease-out;
+  animation-name: ${fadeIn};
+  animation-fill-mode: forwards;
 `;
 
 const DialogBlock = styled.div`
@@ -26,6 +49,11 @@ const DialogBlock = styled.div`
   p {
     font-size: 1.125rem;
   }
+
+  animation-duration: 0.25s;
+  animation-timing-function: ease-out;
+  animation-name: ${slideUp};
+  animation-fill-mode: forwards;
 `;
 
 const ButtonGroup = styled.div`
@@ -41,7 +69,7 @@ const ShortMarginButton = styled(Button)`
 `;
 
 function Dialog({ title, children, confirmText, cancelText, onConfirm, onCancle, visible }) {
-  if( !visible) return null;
+  if( !visible ) return null;
 
   return (
     <DarkBackground>
@@ -49,8 +77,8 @@ function Dialog({ title, children, confirmText, cancelText, onConfirm, onCancle,
         <h3>{title}</h3>
         <p>{children}</p>
         <ButtonGroup>
-          <ShortMarginButton color="gray">{cancelText}</ShortMarginButton>
-          <ShortMarginButton color="pink">{confirmText}</ShortMarginButton>
+          <ShortMarginButton color="gray" onClick={onCancle}>{cancelText}</ShortMarginButton>
+          <ShortMarginButton color="pink"  onClick={onConfirm}>{confirmText}</ShortMarginButton>
         </ButtonGroup>
       </DialogBlock>
     </DarkBackground>
