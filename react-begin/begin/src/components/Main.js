@@ -4,6 +4,8 @@ import Button from './Button';
 import Card from './Card';
 import Dialog from './Dialog';
 import Media from './Media';
+import CardSlider from './CardSlider'
+
 
 
 const Compo = styled.div`
@@ -90,6 +92,10 @@ const Main = () => {
           </Dialog>
         </ThemeProvider>
       </Box>
+
+      <div>
+          <CardSlider />
+      </div>
 
     </div>
   );
