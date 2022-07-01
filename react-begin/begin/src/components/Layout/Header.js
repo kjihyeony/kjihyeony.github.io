@@ -1,6 +1,9 @@
 import React from "react";
 import styled from 'styled-components';
-import Theme from './../Theme'
+import Theme from './../Theme';
+import Navbar  from './../Navbar';
+import Sidebar  from './../Sidebar'
+import { BrowserRouter as Router } from 'react-router-dom';
 
 const HeaderWrap = styled.div`
 background: wheat;
@@ -19,13 +22,8 @@ const Header = () => {
   return(
     <header className="Header"  theme={Theme}>
       <HeaderWrap>
-        <div className="Header-inner">
-          <h1>SDC Header</h1>
-            <ul className="Gnb">
-              <li className="Gnb-item"><a href="#">Menu1</a></li>
-              <li className="Gnb-item"><a href="#">Menu2</a></li>
-            </ul>
-        </div>
+      <Sidebar />
+        <Navbar />
       </HeaderWrap>
     </header>
   )

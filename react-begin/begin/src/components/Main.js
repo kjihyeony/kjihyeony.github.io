@@ -8,6 +8,7 @@ import CardSlider from './CardSlider'
 
 
 
+
 const Compo = styled.div`
   padding: 10px;
   border: 1px solid ${props => props.color || 'black'};
@@ -68,13 +69,12 @@ const Main = () => {
         <ThemeProvider
           theme={{
             palette: {
-              blue: '#228be6',
+              blue: '#ccc',
               gray: '#495057',
-              pink: '#f06595'
+              pink: '#fefefe'
             }
           }}
         >
-  
           <StyleCardWrap>
             <Card />
             <Card color="pink"  />
@@ -94,7 +94,10 @@ const Main = () => {
       </Box>
 
       <div>
-          <CardSlider />
+      {/*
+         <CardSlider />
+    */}
+     
       </div>
 
     </div>

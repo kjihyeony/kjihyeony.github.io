@@ -59,29 +59,29 @@ const CardSlider = () => {
     };  
 	return(
 		    <SlideWrap>
-          <h2> Single Item</h2>
-          <StyledSlider {...settings}>
-            <div>
-              <CardItem>
-                카드원
-              </CardItem>
-            </div>
-            <div>
-              <h3>2</h3>
-            </div>
-            <div>
-              <h3>3</h3>
-            </div>
-            <div>
-              <h3>4</h3>
-            </div>
-            <div>
-              <h3>5</h3>
-            </div>
-            <div>
-              <h3>6</h3>
-            </div>
-          </StyledSlider>
+        <h2> Single Item</h2>
+        <StyledSlider {...settings}>
+          <div>
+            <CardItem>
+              카드원
+            </CardItem>
+          </div>
+          <div>
+            <h3>2</h3>
+          </div>
+          <div>
+            <h3>3</h3>
+          </div>
+          <div>
+            <h3>4</h3>
+          </div>
+          <div>
+            <h3>5</h3>
+          </div>
+          <div>
+            <h3>6</h3>
+          </div>
+        </StyledSlider>
       </SlideWrap>
 	);
 };
