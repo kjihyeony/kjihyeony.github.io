@@ -14,3 +14,8 @@ code {
 *, *:before, *:after {
   box-sizing: border-box;
 }
+
+.modalSection {
+  position: relative;
+  z-index: 2;
+}

@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import styled, { css, ThemeProvider } from 'styled-components';
+import styled, { css, ThemeProvider, keyframes } from 'styled-components';
 import Button from './Button';
 import Card from './Card';
 import Dialog from './Dialog';
 import Media from './Media';
 import CardSlider from './CardSlider'
-
-
 
 
 const Compo = styled.div`
@@ -46,13 +44,13 @@ const Main = () => {
     console.log('확인');
     setDialog(false);
   };
-  const onCancle = () => {
+  const onCancel = () => {
     console.log('취소');
     setDialog(false);
   };
 
   return (
-    <div>
+    <div className="modalSection">
       <h1>Phase1 Main</h1>
       <p>Pahse1 페이지</p>
       <Compo color="red">
@@ -80,19 +78,18 @@ const Main = () => {
             <Card color="pink"  />
             <Card />
           </StyleCardWrap>
-          <Dialog
+        </ThemeProvider>
+      </Box>
+      <Dialog
               title="정말로 삭제하시겠습니까?"
               confirmText="삭제"
               cancelText="취소"
               onConfirm={onConfirm}
-              onCancle={onCancle}
+              onCancel={onCancel}
               visible={dialog}
             >
             데이터를 정말로 삭제하시겠습니까?
           </Dialog>
-        </ThemeProvider>
-      </Box>
-
       <div>
       {/*
          <CardSlider />
