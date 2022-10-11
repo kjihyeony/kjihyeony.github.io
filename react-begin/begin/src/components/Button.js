@@ -8,9 +8,23 @@ function Button({className, children, size, color, outline, fullWidth, onClick }
   );
 }
 
+function BLink({className, children, size, color, outline, fullWidth, onClick }) {
+  return (
+    <button onClick={onClick} className={classNames('Link', className, size, color, {outline, fullWidth})}>{children}</button>
+  );
+}
+
+
 Button.defaultProps = {
   size: 'medium',
-  color: 'blue'
+  color: 'black'
+};
+
+
+BLink.defaultProps = {
+  size: 'medium',
+  color: 'black'
 };
 
 export default Button;
+export default BLink;
