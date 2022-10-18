@@ -15,7 +15,7 @@ import { Canvas, useFrame, useThree, useLoader } from '@react-three/fiber'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 
 // React Spring
-import { a, useTransition } from "@react-spring/web";
+import { a, useTransition } from "@react-spring/web";    
 //Intersection Observer
 import { useInView } from "react-intersection-observer";
 
@@ -35,7 +35,7 @@ const Lights = () =>{
   )
 }
 
-const HTMLContent = ( {domContent,  children, modelPath, positionY } ) => {
+const HTMLContent = ({bgColor, domContent,  children, modelPath, positionY } ) => {
 
 
   {
@@ -49,6 +49,13 @@ const HTMLContent = ( {domContent,  children, modelPath, positionY } ) => {
 
   const ref = useRef()
   useFrame( () => (ref.current.rotation.y -= 0.01) );
+  const [refItem, inView] = useInView({
+    threshold : 0
+  })
+
+  useEffect( () => {
+    inView &&  (document.body.style.background = bgColor) 
+  },[inView])
 
   return (
     <Section factor={1.5} offset={1}>
@@ -56,7 +63,9 @@ const HTMLContent = ( {domContent,  children, modelPath, positionY } ) => {
       <mesh ref={ref} position={[0, -35, 0]}>
         <Model modelPath={modelPath} />
       </mesh>
-        <Html portal={domContent} fullscreen>{children}</Html>
+        <Html portal={domContent} fullscreen>
+          <div className="container" ref={refItem}>{children}</div>
+        </Html>
       </group>
     </Section>
   )
@@ -78,22 +87,16 @@ function App() {
           >
           <Lights />
 
-          <HTMLContent domContent={domContent} modelPath="/armchairYellow.gltf" positionY={250} >
-            <div className="container">
-              <h1 className="title">Hello</h1>
-            </div>
+          <HTMLContent domContent={domContent} modelPath="/building.gltf" positionY={250} bgColor={'#FFF9D0'}>
+            <h1 className="title">Hello</h1>
           </HTMLContent>
 
-          <HTMLContent domContent={domContent} modelPath="/armchairGreen.gltf" positionY={0} >
-            <div className="container">
-              <h1 className="title">Bye</h1>
-            </div>
+          <HTMLContent domContent={domContent} modelPath="/armchairGreen.gltf" positionY={0} bgColor={'#b4d7f8'}>
+            <h1 className="title">Bye</h1>
           </HTMLContent>
 
-          <HTMLContent domContent={domContent} modelPath="/armchairGray.gltf" positionY={-250} >
-            <div className="container">
-              <h1 className="title">gray</h1>
-            </div>
+          <HTMLContent domContent={domContent} modelPath="/armchairGray.gltf" positionY={-250} bgColor={'#FFC5B1'}>
+            <h1 className="title">gray</h1>
           </HTMLContent>
         </Canvas>
         <div className="scrollArea" ref={scrollArea}  onScroll={onScroll}>
