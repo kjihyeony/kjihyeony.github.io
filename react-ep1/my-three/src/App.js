@@ -19,8 +19,8 @@ import { a, useTransition } from "@react-spring/web";
 //Intersection Observer
 import { useInView } from "react-intersection-observer";
 
-function Model() {
-  const gltf = useGLTF('/armchairYellow.gltf');
+function Model({modelPath}) {
+  const gltf = useGLTF(modelPath);
   return (<primitive object={gltf.scene} />);
 }
 
@@ -35,7 +35,7 @@ const Lights = () =>{
   )
 }
 
-const HTMLContent = () => {
+const HTMLContent = ( {domContent,  children, modelPath, positionY } ) => {
 
 
   {
@@ -52,33 +52,54 @@ const HTMLContent = () => {
 
   return (
     <Section factor={1.5} offset={1}>
-      <group position={[0, 250, 0]}>
+      <group position={[0, positionY , 0]}>
       <mesh ref={ref} position={[0, -35, 0]}>
-        <Model />
+        <Model modelPath={modelPath} />
       </mesh>
-        <Html fullscreen>
-          <div className="container">
-            <h1 className="title">Hello</h1>
-          </div>
-        </Html>
+        <Html portal={domContent} fullscreen>{children}</Html>
       </group>
     </Section>
   )
 };
 
 function App() {
+  const domContent = useRef();
+  const scrollArea = useRef();
+  const onScroll = (e) => ( state.top.current = e.target.scrollTop)
+  useEffect( () => void onScroll({ target: scrollArea.current}),[] )
+
   return (
     <>
       <Header />
       <Suspense fallback={null}>
-      <Canvas
-        colormanagement = "true"
-        camera={{position:[0, 0, 120], fov:70}}
-        >
-        <Lights />
-        <HTMLContent />
-  
-      </Canvas>
+        <Canvas
+          colormanagement = "true"
+          camera={{position:[0, 0, 120], fov:70}}
+          >
+          <Lights />
+
+          <HTMLContent domContent={domContent} modelPath="/armchairYellow.gltf" positionY={250} >
+            <div className="container">
+              <h1 className="title">Hello</h1>
+            </div>
+          </HTMLContent>
+
+          <HTMLContent domContent={domContent} modelPath="/armchairGreen.gltf" positionY={0} >
+            <div className="container">
+              <h1 className="title">Bye</h1>
+            </div>
+          </HTMLContent>
+
+          <HTMLContent domContent={domContent} modelPath="/armchairGray.gltf" positionY={-250} >
+            <div className="container">
+              <h1 className="title">gray</h1>
+            </div>
+          </HTMLContent>
+        </Canvas>
+        <div className="scrollArea" ref={scrollArea}  onScroll={onScroll}>
+          <div style={{position:'sticky', top: 0}} ref={domContent}></div>
+          <div style={{height: `${state.sections * 100}vh`}}></div>
+        </div>
       </Suspense>
     </>
   );
