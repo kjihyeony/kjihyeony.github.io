@@ -5,12 +5,9 @@ import MenuIcon from '../../Assets/menu.svg';
 import gsap from 'gsap';
 
 function Header({timeline}) {
-  const boxRef = useRef();
 
   useEffect( () => {
-    let tl = gsap.timeline();
-
-    tl.to(".liLink",{
+   timeline.to(".liLink",{
         y: 0,
         opacity: 1,
         duration: 1,
@@ -31,7 +28,7 @@ function Header({timeline}) {
           <img src={MenuIcon}  alt=''/>
         </div>
         <div className='menu-items'>
-          <li ref={boxRef}><Link to="/" className='liLink'>Home</Link></li>
+          <li><Link to="/" className='liLink'>Home</Link></li>
           <li><Link to="/about" className='liLink'>About</Link></li>
           <li ><Link to="/project" className='liLink'>Projects</Link></li>
         </div>
