@@ -1,9 +1,28 @@
-import React from 'react'
-import './Header.scss'
-import {Link} from 'react-router-dom'
-import MenuIcon from '../../Assets/menu.svg'
+import React, {useRef,useEffect,useLayoutEffect} from 'react';
+import './Header.scss';
+import {Link} from 'react-router-dom';
+import MenuIcon from '../../Assets/menu.svg';
+import gsap from 'gsap';
 
-function Header() {
+function Header({timeline}) {
+  const boxRef = useRef();
+
+  useEffect( () => {
+    let tl = gsap.timeline();
+
+    tl.to(".liLink",{
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        delay: .1,
+        stagger: {
+          amount: .3
+        }
+      }
+    )
+
+  },[]);
+
   return (
     <div>
       <header>
@@ -12,11 +31,11 @@ function Header() {
           <img src={MenuIcon}  alt=''/>
         </div>
         <div className='menu-items'>
-          <li><Link to="/" className='liLink'>Home</Link></li>
+          <li ref={boxRef}><Link to="/" className='liLink'>Home</Link></li>
           <li><Link to="/about" className='liLink'>About</Link></li>
-          <li><Link to="/project" className='liLink'>Projects</Link></li>
+          <li ><Link to="/project" className='liLink'>Projects</Link></li>
         </div>
-      </header> 
+      </header>
     </div>
   )
 }
