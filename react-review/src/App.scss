@@ -87,5 +87,45 @@ body {
   opacity: 1;
   z-index: 1500;
   pointer-events: none;
+  background:url( ./Assets/noise.gif);
+}
+::-webkit-scrollbar{
+  display: none;
+}
 
+.cursor-follower {
+  position:absolute;
+  background: url(./Assets/Red_asterisk.svg) no-repeat 50% 50%;
+  background-size: cover;
+  width: 70px;
+  height: 70px;
+  animation:animate-rotate 10s infinite linear;
+  z-index: 1;
+  user-select: none;
+  opacity: .8;
+  overflow: hidden;
+  pointer-events: none;
+  transform: translate(35px, 35px);
+  display: none;
+}
+@keyframes animate-rotate {
+  to{
+    transform: rotate(0deg);
+  }from {
+    transform: rotate(360deg)
+  }
+}
+
+.wrap{
+  display: flex;
+  align-items: center;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px
+}
+@media screen and(width: 768px) {
+  .wrap  {
+    max-width: 768px;
+    padding: 0 20px;
+  }
 }

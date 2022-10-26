@@ -1,0 +1,33 @@
+.project-container {
+  width: 100%;
+  max-width: 1280px;
+  height: 50vh;
+  margin: 300px auto 0;
+  visibility: hidden;
+}
+
+.img-container {
+  width: 100%;
+  height: 100%;
+  max-width: 485px;
+  position:relative;
+  overflow: hidden;
+  margin: 0 auto;
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 100%;
+    max-width: 485px;
+    height: 100%;
+    top: 0;
+    right: 0;
+    background-color:  #e9dbd4;
+  }
+
+  img {
+    position: absolute;
+    display: block;
+    max-width: 1280px;
+  }
+}
