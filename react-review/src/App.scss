@@ -67,10 +67,14 @@ h5,
 h6 {
   overflow-wrap: break-word;
 }
+#root {
+  height: 100%;
+}
 
 .App {
   margin: 0;
   padding: 0;
+  height: 100%;
 }
 
 body {

@@ -1,4 +1,27 @@
+.project {
+  height: 100%;
+
+  .wrap {
+    flex-wrap: wrap;
+  }
+}
+
+.project-title {
+  width: 100%;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.project-sub-title {
+  flex: 1;
+}
+
+.motion-div {
+  background-color: #fff;
+}
+
 .project-container {
+  flex: 1;
   width: 100%;
   max-width: 1280px;
   height: 50vh;
@@ -22,7 +45,7 @@
     height: 100%;
     top: 0;
     right: 0;
-    background-color:  #e9dbd4;
+    background-color: #fff;
   }
 
   img {
@@ -30,4 +53,8 @@
     display: block;
     max-width: 1280px;
   }
+}
+
+.test {
+  height: 50vh
 }
