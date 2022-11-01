@@ -51,8 +51,12 @@ function App() {
     }, "-=1")
 
     console.log(mouseX)
-  })
+  });
 
+  const imageDetails = {
+    width: 524,
+    height: 650,
+  };
 
 
   return (
@@ -64,7 +68,7 @@ function App() {
             <Route exact path="/" element={<Main />} />
             <Route exact path="/about" element={<About />} />
             <Route exact path="/project" element={<Projects />} />
-            <Route exact path="/about/:id" element={<AboutSub />} />
+            <Route exact path="/about/:id" element={<AboutSub imageDetails={imageDetails} />} />
           </Routes>
           <div className="cursor-follower" ref={el=>cursor = el}></div>
         <AnimatePresence /> 

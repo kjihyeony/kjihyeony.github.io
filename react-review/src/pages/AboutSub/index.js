@@ -46,7 +46,7 @@ const letter = {
 };
 
 
-function AboutSub (){
+const AboutSub = ({imageDetails}) => {
   const timeline_home = gsap.timeline();
 
   return(
@@ -87,13 +87,24 @@ function AboutSub (){
       </div>
       <div className='bottom-row'>
         <div className='bottom'>
-          <motion.div className='image-container-single'>
-            <motion.div className='thumbnail-single'>
+          <motion.div className='image-con tainer-single'>
+            <motion.div 
+              initial = {{
+                y: '-50%',
+                width: imageDetails.width, 
+                height: imageDetails.height,
+              }}
+              animate = {{
+                y:0,
+                width:'100%',
+                transition:{ delay:.2, ...transition}
+              }}
+              className='thumbnail-single'>
               <motion.div className='frame-single'>
                 <motion.img
                   alt='an image'
                   src={woman}
-                >
+                > 
                 
                   </motion.img>
                 </motion.div>
@@ -105,6 +116,6 @@ function AboutSub (){
     </motion.div>
     </>
   )
-}
+};
 
-export default AboutSub
+export default AboutSub;
