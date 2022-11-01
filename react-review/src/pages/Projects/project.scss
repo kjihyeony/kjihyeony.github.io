@@ -1,8 +1,8 @@
 .project {
   height: 100%;
-
   .wrap {
     flex-wrap: wrap;
+    margin-top: 400px;
   }
 }
 
@@ -17,6 +17,9 @@
 }
 
 .motion-div {
+  background-color: #e9dbd4;
+}
+.motion-div2 {
   background-color: #fff;
 }
 

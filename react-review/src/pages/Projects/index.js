@@ -36,9 +36,20 @@ function Projects() {
           }}
           animate = {{ 
             height: '0%',
-            transition: { ease: [0.455, 0.03, 0.515, 0.955], duration: 2.8 }
+            transition: { easeOut: [0.455, 0.03, 0.515, 0.955], duration: 0.5 }
           }}
           >
+          </motion.div>
+          <motion.div className='motion-div2'
+          initial= {{ 
+            height: '100%' 
+          }}
+          animate = {{ 
+            height: '0%',
+            transition: { easeOut: [0.455, 0.03, 0.515, 0.955], duration: 1 }
+          }}
+          >
+          </motion.div>
           <div className='wrap'>
             <div className='project-title'>Hi, i'm title</div>
             <div className='project-sub-title'>Sub page</div>
@@ -57,7 +68,6 @@ function Projects() {
           <div className='test'>
           This contents box
           </div>
-        </motion.div>
       </div>
     </>
   )

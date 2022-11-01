@@ -1,9 +1,11 @@
 import React, {useRef, useEffect} from 'react';
 import  {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
-import {Main, About, Projects} from './pages/';
+import {Main, About, Projects, AboutSub} from './pages/';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop'
 import './App.scss';
 import gsap from 'gsap'
+import {AnimatePresence} from 'framer-motion'
+
 
 function App() {
   let cursor = useRef(null)
@@ -56,14 +58,18 @@ function App() {
   return (
     <div className="App">
       <Router>
-      <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/project" element={<Projects />} />
-        </Routes>
-        <div className="cursor-follower" ref={el=>cursor = el}></div>
+        <AnimatePresence  initial={false} exitBeforeEnter/>
+          <ScrollToTop />
+          <Routes>
+            <Route exact path="/" element={<Main />} />
+            <Route exact path="/about" element={<About />} />
+            <Route exact path="/project" element={<Projects />} />
+            <Route exact path="/about/:id" element={<AboutSub />} />
+          </Routes>
+          <div className="cursor-follower" ref={el=>cursor = el}></div>
+        <AnimatePresence /> 
       </Router>
+
     </div>
   );
 }
