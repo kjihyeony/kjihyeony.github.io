@@ -16,7 +16,7 @@ const firstName = {
     transition: {
       delayChildren: 0.6,
       staggerChildren: 0.04,
-      staggerDirection: -1,
+      staggerDirection: -1,  
     },
   },
 };
@@ -67,7 +67,7 @@ const AboutSub = ({imageDetails}) => {
             <span>81.379234</span>
           </div>
         </motion.div>
-        <motion.div className='model'>
+        {/**        <motion.div className='model'>
           <motion.span className='first' variants={firstName}>
             <motion.span variants={letter}>Y</motion.span>
             <motion.span variants={letter}>a</motion.span>
@@ -82,7 +82,7 @@ const AboutSub = ({imageDetails}) => {
             <motion.span variants={letter}>a</motion.span>
             <motion.span variants={letter}>a</motion.span>
           </motion.span>
-        </motion.div>
+        </motion.div> */}
       </div>
       </div>
       <div className='bottom-row'>
@@ -97,19 +97,32 @@ const AboutSub = ({imageDetails}) => {
               animate = {{
                 y:0,
                 width:'100%',
-                transition:{ delay:.2, ...transition}
+                height: window.innerWidth > 1440 ? 800 : 500,
+                transition:{ delay:0.2, ...transition}
               }}
               className='thumbnail-single'>
               <motion.div className='frame-single'>
                 <motion.img
+                  initial = {{scale: 1.1}}
+                  animate = {{
+                    transition: {delay: 0.2, ...transition},
+                    y: window.innerWidth > 1440 ? -1200: -600,
+                  }}
                   alt='an image'
                   src={woman}
-                > 
-                
+                >
                   </motion.img>
                 </motion.div>
               </motion.div>
             </motion.div>
+          </div>
+          <div>
+            box<br />
+            box<br />
+            box<br />
+            box<br />
+            box<br />
+            box<br />
           </div>
         </div>
       </div>

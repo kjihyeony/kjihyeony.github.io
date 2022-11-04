@@ -66,7 +66,7 @@ function App() {
           <ScrollToTop />
           <Routes>
             <Route exact path="/" element={<Main />} />
-            <Route exact path="/about" element={<About />} />
+            <Route exact path="/about" element={<About imageDetails={imageDetails} />} />
             <Route exact path="/project" element={<Projects />} />
             <Route exact path="/about/:id" element={<AboutSub imageDetails={imageDetails} />} />
           </Routes>

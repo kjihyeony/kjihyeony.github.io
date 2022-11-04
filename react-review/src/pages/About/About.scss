@@ -1,11 +1,13 @@
 .about {
-  max-width: 1280pxx;
-  margin-top: 200px;
-  padding: 0 49px;
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.about-row {
   display: flex;
-  justify-content: center;
-  flex-direction: column;
-  text-align: center;
+  height: 100vh;
+  align-items: center;
 }
 
 .about-title {
@@ -16,8 +18,7 @@
 
 .about-box {
   position: relative;
-  width: 520px;
-  height:400px;
+  width: 526px;
   margin: 0 auto;
   overflow: hidden;
   border: 1px solid red;
@@ -28,4 +29,12 @@
 
 .about-img {
   width: 100%;
+}
+
+.information {
+  width: 100%;
+  position: absolute;
+  display: flex;
+  bottom: 20vh;
+  justify-content: center;
 }

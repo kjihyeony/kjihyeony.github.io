@@ -5,11 +5,12 @@ import gsap from 'gsap'
 import Transition from '../../components/Transition';
 import './About.scss'
 import woman from '../../Assets/compressed-image.jpg'
-import {motion} from 'framer-motion'
+import {motion, AnimatePresence} from 'framer-motion'
 
-const transition = { duration: 3, ease: [0.43, 0.13, 0.23, 0.96] };
+const transition = { duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96] };
+const transition2 = { duration: 1.2, ease: [0.43, 0.13, 0.23, 0.96] };
 
-function About() {
+const About = ({imageDetails}) => {
 
   const timeline_home = gsap.timeline();
   const about = gsap.timeline();
@@ -27,37 +28,61 @@ function About() {
   return (
     <>
     <motion.div
-      exit={{opacity: 0}}  
-      transition={transition} 
+      exit={{opacity: 0}}
+      transition={transition}
       >
       <Header timeline={timeline_home} />
+
       <Transition timeline={about}/>
+
       <div className='about'>
-        <h2 className='about-title' ref={abouth2}>About</h2>
-        <div className='about-box'>
-          <Link to="/about/1">
-            <motion.img 
-              initial={{}}
-              whileHover={{scale: 1.1}} 
-              transition={transition}
-              className='about-img' src={woman} alt="" />
-          </Link>
-        </div>
-        <motion.div 
-          exit={{ opacity: 0 }}
-          transition={transition} 
-          className='information'>
-          <div className='title'>Yasmeen Tariq</div>
-          <div className='location'>
-            <span>28.55</span>
-            <span>-81.493</span>
+        <div className='about-row'>
+          {/*        <h2 className='about-title' ref={abouth2}>About</h2> */}
+          <div className='about-box'
+
+            style={{
+              width: imageDetails.width,
+              height: imageDetails.height,
+            }}
+          >
+            <Link to="/about/1">
+              <motion.img
+                src={woman}
+                alt=""
+                whileHover={{scale: 1.1}}
+                transition={transition}
+                className='about-img' />
+            </Link>
           </div>
+          <AnimatePresence>
+          <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={transition2}
+          className='information'>
+            <div className='title'>Yasmeen Tariq</div>
+            <div className='location'>
+              <span>28.55</span>
+              <span>-81.493</span>
+            </div>
         </motion.div>
+          </AnimatePresence>
+
+        </div>
+        <div>
+          box<br />
+          box<br />
+          box<br />
+          box<br />
+          box<br />
+          box<br />
+        </div>
       </div>
     </motion.div>
 
     </>
   )
 }
-  
+
 export default About
