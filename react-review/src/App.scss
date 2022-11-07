@@ -79,6 +79,9 @@ h6 {
 
 body {
   background-color: #e9dbd4;
+  &.no-scroll {
+    overflow-y: hidden;
+  }
 }
 
 .noise::before  {
