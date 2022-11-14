@@ -17,12 +17,13 @@
 * {
   margin: 0;
 }
-/*
+/*s
     3. Allow percentage-based heights in the application
   */
 html,
 body {
   height: 100%;
+  -webkit-font-smoothing: antialiased;
 }
 /*
     Typographic tweaks!

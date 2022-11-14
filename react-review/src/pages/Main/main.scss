@@ -1,123 +1,175 @@
-*{
+* {
   font-family: 'Ogg';
 }
-.container{
+
+.main-cloud {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #8eb0d6;
+  z-index: -1;
+  &::before {
+    content: '';
+    display: block;
+    width: 300%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: url(../../Assets/cloud-bg.png) no-repeat 50% 50%;
+    background-size: cover;
+    animation: cloudBg 400s infinite;
+    opacity: 0.6;
+  }
+}
+
+@keyframes cloudBg {
+  0%{
+    transform: translateX(0)
+  }
+  to {
+    transform: translateX(-100%)
+  }
+}
+
+.container {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  height: 50vh;
   width: 100%;
+  height: 50vh;
   margin-top: -80px;
 }
-.container1{
+
+.container1 {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   padding: 0px 100px;
   height: 100%;
-  justify-content: center;
   overflow: hidden;
+}
 
-}
-.txt-line{
+.txt-line {
   overflow: hidden;
 }
-.txt-line p{
+
+.txt-line p {
   font-size: 180px;
   text-transform: capitalize;
   letter-spacing: -10px;
   font-family: 'Ogg';
   // overflow: hidden;
   height: 100%;
-  line-height: 132%;
+  line-height: 155%;
+  color: #fff;
 }
-.line-bottom{
+
+.line-bottom {
   margin-top: -130px;
 }
-.right-side-menu{
+
+.right-side-menu {
   position: absolute;
   top: 40vh;
   text-align: right;
   right: 60px;
 }
-.right-side-menu p{
+
+.right-side-menu p {
   font-size: 20px;
   font-family: 'Inter';
   color: #642420;
   cursor: pointer;
   font-weight: lighter;
 }
-.left-side-quote{
+
+.left-side-quote {
   margin-left: 120px;
 }
-.left-side-quote p{
-  color: black;
+
+.left-side-quote p {
   font-size: 15px;
   font-family: 'Inter';
   word-spacing: 10px;
   text-transform: uppercase;
   font-weight: 300;
-
+  color: #fff;
 }
-.flower-svg{
+
+.flower-svg {
   margin-left: 150px;
   margin-top: -250px;
 }
-.flower-svg img{
-  animation:  animate-rotate 30s infinite linear;
+
+.flower-svg img {
+  animation: animate-rotate 30s infinite linear;
   width: 80px;
 }
-.short-about{
+
+.short-about {
   margin-top: 25vh;
   display: flex;
-  align-items: center;
-  width: 100%;
   justify-content: space-between;
   flex-direction: column;
+  align-items: center;
+  width: 100%;
+  color: #fff;
 }
-.main-h1-short-about{
+
+.main-h1-short-about {
   margin-top: 100px;
 }
-.sub-main-p-short-about{
+
+.sub-main-p-short-about {
   margin-top: 120px;
 }
-.short-about h1{
+
+.short-about h1 {
   font-size: 150px;
   font-weight: 500;
   font-family: 'Ogg';
-  margin-bottom: -150px;
+  margin-bottom: -100px;
   letter-spacing: -2px;
   text-align: center;
 }
-.short-about p{
+
+.short-about p {
   text-align: center;
-  color: #642420;
+  color: #fefefe;
   font-family: 'Inter';
   font-weight: 500;
   font-size: 18px;
   margin-top: 20px;
 }
-.another-svg{
+
+.another-svg {
   margin-top: 50px;
 }
-.short-about .another-svg img{
+
+.short-about .another-svg img {
   width: 50px;
   animation: animate-rotate 10s infinite linear;
 }
 
 @keyframes animate-rotate {
-  from{
-      transform: rotate(0deg);
+  from {
+    transform: rotate(0deg);
   }
-  to{
-      transform: rotate(360deg);
+
+  to {
+    transform: rotate(360deg);
   }
 }
-.my-skills-main-reel{
+
+.my-skills-main-reel {
   width: 100%;
   overflow: hidden;
 }
 
-.my-skills-reel{
+.my-skills-reel {
   margin-top: 300px;
   display: flex;
   align-items: center;
@@ -128,20 +180,23 @@
 }
 
 @keyframes animation-reel {
-  from{
-      transform: translateX(0%);
+  from {
+    transform: translateX(0%);
   }
-  to{
-      transform: translateX(-100%);
+
+  to {
+    transform: translateX(-100%);
   }
 }
-.reel-item{
+
+.reel-item {
   font-weight: 400;
   font-family: 'Ogg';
   font-size: 180px;
   text-transform: uppercase;
 }
-.skill-set-boxes{
+
+.skill-set-boxes {
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -151,41 +206,50 @@
   flex-wrap: wrap;
 }
 
-.skill-set-box{
+.skill-set-box {
   margin: 50px 10px;
   display: flex;
   width: 350px;
   height: 200px;
   color: #e6e6e6;
   flex-direction: column;
-  background-color: #101010;
-  border: 1px solid transparent;
-  transition: color .8s cubic-bezier(.16, 1, .3 ,1);
-  transition: background-color 1s cubic-bezier(.16, 1, .3 ,1);
-  transition: border .8s cubic-bezier(.16, 1, .3 ,1);
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 1.5rem;
+  transition: color 2s;
+  transition: background-color 1s cubic-bezier(.16, 1, .3, 1);
+  transition: border .8s cubic-bezier(.16, 1, .3, 1);
 }
-.skill-set-box:hover{
+
+.skill-set-box:hover {
   color: #161616;
-  background-color: #f0f0f0;
-  border: 1px solid #161616;
+  background-color: rgba(255,255,255,0.3);
+  border: 1px solid #fff;
+  p {
+    color: #000
+  }
 }
+
 .skill-set-box h1,
-.skill-set-box p{
+.skill-set-box p {
   margin: 0px 30px;
   font-family: 'Inter';
   font-weight: lighter;
   text-transform: uppercase;
 }
-.skill-set-box h1{
+
+.skill-set-box h1 {
   margin-top: 35px;
   font-size: 20px;
   font-weight: bold;
 }
-.skill-set-box p{
+
+.skill-set-box p {
   margin-top: 20px;
   font-size: 13px;
 }
-.project-and-work{
+
+.project-and-work {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -198,7 +262,8 @@
   padding-bottom: 100px;
   border-bottom: 1px dashed black;
 }
-.project-and-work h1 .h1-project{
+
+.project-and-work h1 .h1-project {
   text-decoration: none;
   color: black;
   font-size: 100px;
@@ -207,90 +272,107 @@
   text-decoration: .5px line-through;
 
 }
-.project-and-work p{
+
+.project-and-work p {
   color: black;
   font-size: 20px;
   margin-top: -20px;
   font-weight: lighter;
   font-family: 'Inter';
 }
-.h1-project img{
+
+.h1-project img {
   width: 90px;
 }
 
 
 @media (max-width: 1200px) {
-  .txt-line p{
-      font-size: 100px;
-      letter-spacing: -5px;
-      font-weight: 500;
+  .txt-line p {
+    font-size: 100px;
+    letter-spacing: -5px;
+    font-weight: 500;
   }
-  .line-bottom{
-      margin-top: -30px;
+
+  .line-bottom {
+    margin-top: -30px;
   }
-  .flower-svg{
-      display: none;
+
+  .flower-svg {
+    display: none;
   }
-  .short-about h1{
-      font-size: 100px;
-      margin: 0;
-      line-height: 88%;
+
+  .short-about h1 {
+    font-size: 100px;
+    margin: 0;
+    line-height: 88%;
   }
-  .short-about p{
-      margin-top: 5px;
-      font-weight: 300;
+
+  .short-about p {
+    margin-top: 5px;
+    font-weight: 300;
   }
+
   .sub-main-p-short-about {
-      margin-top: 10px;
+    margin-top: 10px;
   }
-  .reel-item{
-      font-size: 100px;
+
+  .reel-item {
+    font-size: 100px;
   }
-  .project-and-work h1 .h1-project{
-      font-size: 50px;
+
+  .project-and-work h1 .h1-project {
+    font-size: 50px;
   }
-  .project-and-work h1 .h1-project img{
-      width: 30px;
+
+  .project-and-work h1 .h1-project img {
+    width: 30px;
   }
-  .project-and-work p{
-      margin-top: -30px;
+
+  .project-and-work p {
+    margin-top: -30px;
   }
-  .skill-set-box{
-      margin: 10px 5px;
+
+  .skill-set-box {
+    margin: 10px 5px;
   }
 }
+
 @media (max-width: 600px) {
-  .short-about p{
-      font-size: 12px;
-      margin-left: 10px;
-      margin-right: 10px;
+  .short-about p {
+    font-size: 12px;
+    margin-left: 10px;
+    margin-right: 10px;
   }
 
-  .txt-line p{
-      font-size: 60px;
-      letter-spacing: -2px;
-      font-weight: 500;
-  }
-  .line-bottom{
-      margin-top: -120px;
-  }
-  
-  .left-side-quote{
-      margin-left: 10vw;
-  }
-  .left-side-quote p{
-      font-size: 12px;
-  }
-  .container1{
-      padding: 0px 50px;
-  }
-  .short-about h1{
-      font-size: 60px;
-      margin: 0;
-      line-height: 88%;
+  .txt-line p {
+    font-size: 60px;
+    letter-spacing: -2px;
+    font-weight: 500;
   }
 
-  .reel-item{
-      font-size: 60px;
+  .line-bottom {
+    margin-top: -120px;
+  }
+
+  .left-side-quote {
+    margin-left: 10vw;
+  }
+
+  .left-side-quote p {
+    font-size: 12px;
+  }
+
+  .container1 {
+    padding: 0px 50px;
+  }
+
+  .short-about h1 {
+    font-size: 60px;
+    margin: 0;
+    line-height: 88%;
+  }
+
+  .reel-item {
+    font-size: 60px;
   }
 }

@@ -11,10 +11,7 @@ import Transition from '../../components/Transition';
 function Main() {
   const main = gsap.timeline();
   const main1 = useRef(null);
-  useEffect( ()=>{
-    
-  } )
-  
+
 
   let text1 = useRef(null);
   let text2 = useRef(null);
@@ -23,31 +20,27 @@ function Main() {
   let p1 = useRef(null);
 
   const timeline_home = gsap.timeline();
-  useEffect( ()=>{
+  useEffect(()=>{
     if (p1.current) { return; }
     p1.current = true;
-  
+
     timeline_home.from([text1, text2, text3, text4],{
-      duration: .8,
+      duration: 1,
       skewY: 15,
       y: 400,
       stagger: {
-        amount: .1
+        amount: .2
       }
     },"-=1.2")
-    timeline_home.from(
-      p1,
-      {
+    timeline_home.from(p1,{
         duration:.6,
         x: -100,
-        delay: .1,
         opacity: 0,
-      }
-    );
+      },"-=.5");
 
-    return () => {
+    // return () => {
 
-    };
+    // };
   })
 
   return (
@@ -79,7 +72,7 @@ function Main() {
               <p ref={el => text3 =el}>Digital</p>
             </div>
             <div className='txt-line line-bottom' id="designer">
-              <p ref={el => text4 =el}>Designer</p>
+              <p ref={el => text4 =el}>Creator</p>
             </div>
           </div>
         </div>
@@ -106,7 +99,7 @@ function Main() {
             <p className='sub-main-short-about'>
               I ALWAYS TRY TOFIND  THE OPTIMAL SOLUTION
             </p>
-          </div>  
+          </div>
           <div className='another-svg'>
             <img src={another} alt="" />
           </div>
@@ -174,9 +167,10 @@ function Main() {
             </div>
           </div>
         </div>
-
+        <div className='main-cloud'>
+        </div>
       </div>
-    </>  
+    </>
   )
 }
 

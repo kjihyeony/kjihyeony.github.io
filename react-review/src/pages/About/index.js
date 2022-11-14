@@ -55,18 +55,18 @@ const About = ({imageDetails}) => {
             </Link>
           </div>
           <AnimatePresence>
-          <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={transition2}
-          className='information'>
-            <div className='title'>Yasmeen Tariq</div>
-            <div className='location'>
-              <span>28.55</span>
-              <span>-81.493</span>
-            </div>
-        </motion.div>
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={transition2}
+                className='information'>
+                <div className='title'>Yasmeen Tariq</div>
+                <div className='location'>
+                  <span>28.55</span>
+                  <span>-81.493</span>
+                </div>
+            </motion.div>
           </AnimatePresence>
 
         </div>
