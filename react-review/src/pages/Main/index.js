@@ -1,14 +1,15 @@
 import React, { useEffect,useRef } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
 import './Main.scss';
 import flower from '../../Assets/flower.svg';
 import another from '../../Assets/another.svg';
 import arrow from '../../Assets/arrow.svg'
-import {Link}from 'react-router-dom';
 import gsap from 'gsap';
 import Transition from '../../components/Transition';
+import {ProjectData} from '../../data/MainProject'
 
-function Main() {
+const Main = (props) => {
   const main = gsap.timeline();
   const main1 = useRef(null);
 
@@ -42,6 +43,8 @@ function Main() {
 
     // };
   })
+
+
 
   return (
     <>
@@ -116,16 +119,16 @@ function Main() {
             </div>
             {/* skill-set-boxes */}
             <div className='skill-set-boxes'>
-              <div className='skill-set-box'>
+              <Link to="ProjectDetail/sdc" state={ProjectData[0]} className='skill-set-box'>
                 <h1 className='skill-set-box-h1'>HTML5</h1>
                 <p className='skill-set-box-p'>I mainly  used to develop Website Markup</p>
                 <p></p>
-              </div>
-              <div className='skill-set-box'>
+              </Link>
+              <Link to="ProjectDetail/hynix" state={ProjectData[1]} className='skill-set-box'>
                 <h1 className='skill-set-box-h1'>CSS3</h1>
                 <p className='skill-set-box-p'>I use this to style and bring design to browser</p>
                 <p></p>
-              </div>
+              </Link>
               <div className='skill-set-box'>
                 <h1 className='skill-set-box-h1'>Javascript</h1>
                 <p className='skill-set-box-p'>With this technology i create visyal effects andn interactionn and DOM</p>

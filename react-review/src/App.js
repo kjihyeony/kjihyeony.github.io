@@ -1,10 +1,11 @@
 import React, {useRef, useEffect} from 'react';
 import  {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
-import {Main, About, Projects, AboutSub} from './pages/';
+import {Main, About, Projects, AboutSub, ProjectDetail} from './pages/';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop'
 import './App.scss';
 import gsap from 'gsap'
 import {AnimatePresence} from 'framer-motion'
+import {ProjectData} from './data/MainProject'
 
 
 function App() {
@@ -69,6 +70,8 @@ function App() {
             <Route exact path="/about" element={<About imageDetails={imageDetails} />} />
             <Route exact path="/project" element={<Projects />} />
             <Route exact path="/about/:id" element={<AboutSub imageDetails={imageDetails} />} />
+            <Route exact path="/projectDetail/sdc" element={<ProjectDetail />} />
+            <Route exact path="/projectDetail/hynix" element={<ProjectDetail />} />
           </Routes>
           <div className="cursor-follower" ref={el=>cursor = el}></div>
         <AnimatePresence /> 
