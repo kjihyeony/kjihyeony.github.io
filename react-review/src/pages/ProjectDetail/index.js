@@ -1,8 +1,8 @@
 import React from "react";
 import { useLocation, Link } from "react-router-dom";
+import styled,{css} from "styled-components";
 import { motion } from "framer-motion"
 import './ProjectDetail.scss'
-
 
 
 const ProjectDetail = (props)=> {
@@ -26,12 +26,12 @@ const ProjectDetail = (props)=> {
   return (
     <div className="projectDetail">
       <motion.div
+        className="motion-div"
         initial="initial"
         animate="animate"
         transition={{ duration: 0.6 }}
         variants={blackBox}
      >
-
     </motion.div>
       <div className="detailBox">
         <div className="detailBox-left">
@@ -41,7 +41,7 @@ const ProjectDetail = (props)=> {
           <div className="title">{state.title}</div>
           <div className="desc">{state.discription}</div>
         </div>
-        <div className="detail-bg"></div>
+        <div className="detail-bg" style={{backgroundColor: `${state.color}`}}></div>
       </div>
     </div>
 

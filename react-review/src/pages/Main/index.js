@@ -1,4 +1,4 @@
-import React, { useEffect,useRef } from 'react';
+import React, { useState,useEffect,useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
 import './Main.scss';
@@ -117,53 +117,53 @@ const Main = (props) => {
               <div className='reel-item'>&nbsp; -- My Skills </div>
               <div className='reel-item'>&nbsp; -- My Skills </div>
             </div>
-            {/* skill-set-boxes */}
-            <div className='skill-set-boxes'>
-              <Link to="ProjectDetail/sdc" state={ProjectData[0]} className='skill-set-box'>
-                <h1 className='skill-set-box-h1'>HTML5</h1>
-                <p className='skill-set-box-p'>I mainly  used to develop Website Markup</p>
-                <p></p>
+            {/* project-box-wrap */}
+            <div className='project-box-wrap'>
+              <Link to="ProjectDetail/sdc" state={ProjectData[0]} className='project-box'>
+                <h1>Samsung Developer Conference</h1>
+                <p className='project-box-p'>삼성 개발자 컨퍼런스 사이트 구축 프로젝트입니다</p>
+                <p>____</p>
               </Link>
-              <Link to="ProjectDetail/hynix" state={ProjectData[1]} className='skill-set-box'>
-                <h1 className='skill-set-box-h1'>CSS3</h1>
-                <p className='skill-set-box-p'>I use this to style and bring design to browser</p>
-                <p></p>
+              <Link to="ProjectDetail/hynix" state={ProjectData[1]} className='project-box'>
+                <h1>SK Hyninx Design System 고도화</h1>
+                <p className='project-box-p'>디자인 컴포넌트 고도화 프로젝트입니다.</p>
+                <p>____</p>
               </Link>
-              <div className='skill-set-box'>
-                <h1 className='skill-set-box-h1'>Javascript</h1>
-                <p className='skill-set-box-p'>With this technology i create visyal effects andn interactionn and DOM</p>
-                <p></p>
-              </div>
-              <div className='skill-set-box'>
-                <h1 className='skill-set-box-h1'>React.js</h1>
-                <p className='skill-set-box-p'>I loved it! I use it to create application that have lot of real</p>
+              <div className='project-box'>
+                <h1>Samsung Tizen Develipers</h1>
+                <p className='project-box-p'>삼성 타이젠 개발자 사이트 구축 프로젝트입니다.</p>
                 <p>____</p>
               </div>
-              <div className='skill-set-box'>
-                <h1 className='skill-set-box-h1'>Greensok - GSAP</h1>
-                <p className='skill-set-box-p'>I used this as an anination library, The most loved ones!</p>
+              <div className='project-box'>
+                <h1>금융규제 Sandbox</h1>
+                <p className='project-box-p'>금융규제 샌드박스 구축 프로젝트입니다.</p>
                 <p>____</p>
               </div>
-              <div className='skill-set-box'>
-                <h1 className='skill-set-box-h1'>Three.js</h1>
-                <p className='skill-set-box-p'>This library deals and simplifies the workinng with webgl and gls</p>
+              <div className='project-box'>
+                <h1>UXS - SKT Design System </h1>
+                <p className='project-box-p'>디자인 시스템 구축 프로젝트입니다.</p>
                 <p>____</p>
               </div>
-              <div className='skill-set-box'>
-                <h1 className='skill-set-box-h1'>Sass</h1>
-                <p className='skill-set-box-p'>I prefer this also innstead of CSS bacause of advance functionnality</p>
+              <div className='project-box'>
+                <h1>Samsung Theme Event</h1>
+                <p className='project-box-p'>삼성 테마 이벤트 페이지 운영 프로젝트입니다.</p>
                 <p>____</p>
               </div>
-              <div className='skill-set-box'>
-                <h1 className='skill-set-box-h1'>Node.js</h1>
-                <p className='skill-set-box-p'>I use it to writing server scripting for application</p>
+              <div className='project-box'>
+                <h1>Samsung PayAdmin</h1>
+                <p className='project-box-p'>삼성페이 어드민 페이지를 관리하는 운영 프로젝트입니다.</p>
+                <p>____</p>
+              </div>
+              <div className='project-box'>
+                <h1>SDS</h1>
+                <p className='project-box-p'>다국어 관리 및 웹접근성 갱신 업무를 진행했던 운영 프로젝트입니다.</p>
                 <p>____</p>
               </div>
             </div>
-            {/* skill-set-boxes */}
-            <div className='project-and-work'>
+            {/* project-box-wrap */}
+            <div className='more-me'>
               <h1>
-                <Link className="h1-project"  to="/projects"> My Project and Works <img src={arrow} alt=""/></Link>
+                <Link className="h1-me"  to="/projects"> More about Me <img src={arrow} alt=""/></Link>
               </h1>
               <br/>
               <p>Click me!</p>
