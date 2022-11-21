@@ -118,7 +118,7 @@ const Main = (props) => {
               <div className='reel-item'>&nbsp; -- My Skills </div>
             </div>
             {/* project-box-wrap */}
-            <div className='project-box-wrap'>
+            <div className='project-box-wrap' id="project">
               <Link to="ProjectDetail/sdc" state={ProjectData[0]} className='project-box'>
                 <h1>Samsung Developer Conference</h1>
                 <p className='project-box-p'>삼성 개발자 컨퍼런스 사이트 구축 프로젝트입니다</p>

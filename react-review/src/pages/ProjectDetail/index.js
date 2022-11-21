@@ -1,5 +1,6 @@
 import React from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { HashLink as Link } from 'react-router-hash-link';
 import styled,{css} from "styled-components";
 import { motion } from "framer-motion"
 import './ProjectDetail.scss'
@@ -11,11 +12,6 @@ const ProjectDetail = (props)=> {
 
   const blackBox = {
     initial: {
-      position: 'absolute',
-      width: '100%',
-      top: 0,
-      left: 0,
-      height: '100%',
       opacity: 1,
       backgroundColor: '#000',
     },
@@ -41,6 +37,7 @@ const ProjectDetail = (props)=> {
           <div className="title">{state.title}</div>
           <div className="desc">{state.discription}</div>
         </div>
+        <Link className="prev-link" smooth to='/#project'>X</Link>
         <div className="detail-bg" style={{backgroundColor: `${state.color}`}}></div>
       </div>
     </div>

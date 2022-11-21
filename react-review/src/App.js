@@ -1,11 +1,12 @@
 import React, {useRef, useEffect} from 'react';
-import  {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import  {BrowserRouter as Router, Routes, Route, Switch} from 'react-router-dom'
+import { withRouter } from 'react-router';
 import {Main, About, Projects, AboutSub, ProjectDetail} from './pages/';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop'
 import './App.scss';
 import gsap from 'gsap'
 import {AnimatePresence} from 'framer-motion'
-import {ProjectData} from './data/MainProject'
+// import ScrollRestoration from 'react-scroll-restoration'
 
 
 function App() {
@@ -63,6 +64,7 @@ function App() {
   return (
     <div className="App">
       <Router>
+          
         <AnimatePresence  initial={false} exitBeforeEnter/>
           <ScrollToTop />
           <Routes>
