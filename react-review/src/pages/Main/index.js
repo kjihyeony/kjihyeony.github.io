@@ -49,6 +49,7 @@ const Main = (props) => {
   let projectBoxRef = useRef();
   let moreMeRef = useRef();
   let moreMeSubRef = useRef();
+  let moreArrRef = useRef();
 
 
   useLayoutEffect (() => {
@@ -79,15 +80,26 @@ const Main = (props) => {
       scrollTrigger: {
         trigger:moreMeRef.current,
         start: 'top bottom',
-        end: '+=1000',
+        end: 'bottom center',
         scrub : 0.5,
         markers: true,
       }
     })
-    // tl2.fromTo(moreMeRef.current,{
-    //   scale: -10,
-    //   rotationX: 100,
-    // },{ scale: 4, rotationX: 20})
+    tl2.to(moreMeRef.current,{
+      scale: 1.8,
+      rotationX: -40,
+    })
+    tl2.fromTo(moreMeSubRef.current,{
+      opacity:0,
+    },{opacity: 1})
+    tl2.fromTo( moreArrRef.current,{
+      y: 50,
+      opacity: 0,
+    },{y:0, opacity: 1})
+    tl2.to(moreMeRef.current,{
+      scale: 1,
+      rotationX: 0,
+    })
 
 
     return() => {
@@ -207,7 +219,7 @@ const Main = (props) => {
         <div className='more-me'>
           <p ref={moreMeSubRef}>Click me!</p>
           <div className='more-me-text'>
-            <Link className="more-me-link" to="/projects" ref={moreMeRef}> More about Me</Link><img src={arrow} alt=""/>
+            <Link className="more-me-link" to="/projects" ref={moreMeRef}> More about Me<img src={arrow} ref={moreArrRef} alt=""/></Link>
           </div>
         </div>
         <div>

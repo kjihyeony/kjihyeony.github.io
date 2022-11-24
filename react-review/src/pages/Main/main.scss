@@ -238,10 +238,10 @@
   align-items: center;
   flex-direction: column;
   width: 80%;
+  height: 50vh;
   margin-left: 10%;
-  margin-top: 100px;
+  margin-top: 35vh;
   margin-bottom: 100px;
-  height: 30vh;
   padding-bottom: 100px;
   border-bottom: 1px dashed black;
 
@@ -257,8 +257,9 @@
     font-weight: bold;
     font-family: 'Ogg';
     transform-origin: center;
-    // transform: skew(10deg, 10deg);
-    transform: matrix3d(1.79534, 0, 0, 0, 0, 1.02963, -1.47075, 0, 0, 0.819203, 0.573504, 0, 0, 159.896, 0, 1);
+    transform: matrix3d(0.5,0,0.00,0,0.00,-0.085,-0.98,0.001,0,0.98,-0.17,0,0,0,0,1);     
+    -webkit-transform: matrix3d(0.5,0,0.00,0,0.00,-0.085,-0.98,0.001,0,0.98,-0.17,0,0,0,0,1);
+
   }
   img {
     display: block;
@@ -268,8 +269,9 @@
   }
 
   p {
-    color: rgba(0,0,0,0.7);
-    font-size: 20px;
+    margin-bottom: 10vh;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 30px;
   }
 }
 
