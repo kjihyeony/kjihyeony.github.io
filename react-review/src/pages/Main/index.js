@@ -1,6 +1,7 @@
 import React, { useState,useEffect,useLayoutEffect,useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 import './Main.scss';
 import flower from '../../Assets/flower.svg';
 import another from '../../Assets/another.svg';
@@ -249,6 +250,7 @@ const Main = (props) => {
         {/* bg-cloud */}
         <div className='main-cloud'></div>
       </div>
+      <Footer />
     </>
   )
 }
