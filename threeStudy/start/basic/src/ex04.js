@@ -26,9 +26,9 @@ const camera = new THREE.PerspectiveCamera(
     0.1,
     1000
   );
-  camera.position.x = 2;
-  camera.position.y = 2;
-  camera.position.z = 5;
+  camera.position.x = 3;
+  camera.position.y = 3;
+  camera.position.z = 10;
   scene.add(camera);
 
 //light
@@ -47,7 +47,20 @@ scene.add(light);
   scene.add(mesh);
 
   //그리기
-  renderer.render(scene, camera);
+  function draw(){
+    // 각도는 Radian을 사용
+    // mesh.rotation.y +=0.1;
+    mesh.rotation.y += THREE.MathUtils.degToRad(2);
+    mesh.position.x +=0.01;
+    if(mesh.position.y >0.02){
+      mesh.position.x = 0;
+    }
+    renderer.render(scene, camera);
+    
+
+    // window.requestAnimationFrame(draw);
+    renderer.setAnimationLoop(draw);
+  }
 
   //화면 비율이 변한다는건 종횡비가 변경된다는 뜻
   function setSize() {
@@ -58,4 +71,6 @@ scene.add(light);
   }
   //이벤트
   window.addEventListener('resize', setSize);
+
+  draw();
 }
