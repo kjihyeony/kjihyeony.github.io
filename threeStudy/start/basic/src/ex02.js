@@ -1,12 +1,8 @@
 import * as THREE from 'three';
 
-// --- 주제 기본장면
+// --- 주제 : 브라우저 창 사이즈 변경에 대응하기
 export default function example(){
-  // console.log(THREE);
-//동적으로캔버스 조합하기
-// const renderer = new THREE.WebGLRenderer();
-// renderer.setSize(window.innerWhidth,window.innerHeight );
-// document.body.appendChild(renderer.domElement);
+
 
 const canvas= document.querySelector('#three-canvas');
 // const renderer= new THREE.WebGLRenderer({ canvas: canvas });
@@ -15,20 +11,12 @@ const renderer = new THREE.WebGLRenderer({
   antialias: true 
 });
 renderer.setSize(window.innerWidth,window.innerHeight );
+console.log(window.devicePixelRatio);
+//대부분 2배정도면 웬~만하면 잘 나오기때문에 삼항연산자로 1보다 크다면 2로해주시고 아니면 1로 해달라 처리.
+//성능면에서 유리
+renderer.setPixelRatio(window.devicePixelRatio > 1 ?  2 : 1);
 
 const scene = new THREE.Scene();
-  //Camera
-  // const camera = new THREE.PerspectiveCamera(
-  //   75, //시야각
-  //   window.innerWidth / window.innerHeight, //종횡비
-  //   0.1, // near
-  //   1000 // far
-  // );
-  // camera.position.x = 1;
-  // camera.position.y = 2;
-  // camera.position.z = 5;
-  // scene.add(camera);
-  //
   const camera = new THREE.OrthographicCamera(
     -(window.innerWidth / window.innerHeight),
     window.innerWidth / window.innerHeight,
@@ -56,4 +44,14 @@ const scene = new THREE.Scene();
 
   //그리기
   renderer.render(scene, camera);
+
+  //화면 비율이 변한다는건 종횡비가 변경된다는 뜻
+  function setSize() {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.render(scene, camera);
+  }
+  //이벤트
+  window.addEventListener('resize', setSize);
 }
