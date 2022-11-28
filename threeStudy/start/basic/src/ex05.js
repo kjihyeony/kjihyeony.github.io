@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-// --- 주제 : 애니메이션 적용
+// --- 주제 : 애니메이션 성능 보정
 export default function example(){
 
 
@@ -46,12 +46,27 @@ scene.add(light);
   const mesh = new THREE.Mesh(geometry, material);
   scene.add(mesh);
 
+  //애니메이션이 경과된 시간을 가지고 있음.
+  const clock = new THREE.Clock();
+
   //그리기
   function draw(){
-    // 각도는 Radian을 사용
+    // console.log(clock.getElapsedTime());
+    const time = clock.getElapsedTime();
+
+
+    //1초에 5번 실행 0 0.2 0.4 0.6 0.8 1 , 1초에 10번실행  0 0.1 0.2 0.3 .... 1초가 찍히는건 똑같음
+
+    //draw함수는 1초에 60번 반복을 목표로실행이되니까 1초에 60도씩 돌아감
+    //1도씩 돌리는 대신에 타임값 적용. time은 시간 그 자체기 때문에 = 을 사용
+    //time을 곱함으로써 성능을 보정
+    //예를들면 실행이 그만큼 늦게되는 애는 타임이 그만틈 늘어나있게됨. 드로우 함수가 실행되는 그 간격의 시간이 성능이 떨어질수록 실행간격이 길테니까 타임은 올라가있겠.
+    //어디서열리든 속도는 같게됨
+
     // mesh.rotation.y +=0.1;
-    mesh.rotation.y += THREE.MathUtils.degToRad(2);
-    mesh.position.x +=0.01;
+    // mesh.rotation.y += THREE.MathUtils.degToRad(1);
+    mesh.rotation.y = 2 * time;
+    mesh.position.x = time;
     if(mesh.position.y >0.02){
       mesh.position.x = 0;
     }
