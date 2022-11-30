@@ -39,6 +39,13 @@ export default function example() {
 	// Controls
 	const controls = new OrbitControls(camera, renderer.domElement);
 	controls.enableDamping = true;
+	// controls.enableZoom = false;
+	// controls.maxDistance = 10;
+	// controls.minDistance = 2;
+	// controls.minPolarAngle = Math.PI / 4; //
+	controls.target.set(2,2,2);
+	controls.autoRotate =true;
+	controls.autoRotateSpeed = 1;
 
 	// Mesh
 	const geometry = new THREE.BoxGeometry(1, 1, 1);
@@ -67,7 +74,7 @@ export default function example() {
 		const delta = clock.getDelta();
 
 		controls.update();
-		
+
 		renderer.render(scene, camera);
 		renderer.setAnimationLoop(draw);
 	}
