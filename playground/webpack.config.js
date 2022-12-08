@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const webpackMode = process.env.NODE_ENV || 'development';
 
@@ -11,9 +12,10 @@ module.exports = {
 	mode: webpackMode,
 	entry: {
 		main: './src/main.js',
+
 	},
 	output: {
-		path: path.resolve('./dist'),
+		path: path.resolve(__dirname,'dist'),
 		filename: '[name].min.js'
 	},
 	// es5로 빌드 해야 할 경우 주석 제거
@@ -45,15 +47,17 @@ module.exports = {
 			},
 			{
 				test: /\.js$/,
+
 				enforce: 'pre',
 				use: ['source-map-loader'],
 			},
 			{
 				test: /\.s?css$/,
 				use: [
-					{
-						loader: 'style-loader',
-					},
+					// {
+					// 	loader: 'style-loader',
+					// },
+					MiniCssExtractPlugin.loader,
 					{
 						loader: 'css-loader',
 						options: {
@@ -62,16 +66,28 @@ module.exports = {
 					},
 					'sass-loader'
 				]
-			}
+			},
+			// {
+			// 	test:/\.jpg$/,
+			// 	use: ["file-loader"],
+			// }
 		]
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
+			filename: './index.html',
 			template: './src/index.html',
 			minify: process.env.NODE_ENV === 'production' ? {
 				collapseWhitespace: true,
 				removeComments: true,
 			} : false
+		}),
+		new HtmlWebpackPlugin({
+			filename: './svg-test.html',
+			template: './src/svg-test.html'
+	}),
+		new MiniCssExtractPlugin({
+			filename: "common.css",
 		}),
 		new CleanWebpackPlugin(),
 		// CopyWebpackPlugin: 그대로 복사할 파일들을 설정하는 플러그인
@@ -81,11 +97,18 @@ module.exports = {
 		// 그대로 사용할 파일들이 없다면 CopyWebpackPlugin을 통째로 주석 처리 해주세요.
 		new CopyWebpackPlugin({
 			patterns: [
-				{ from: "./src/main.css", to: "./main.css" },
-				// { from: "./src/images", to: "./images" },
+				// { from: "./src/main.css", to: "./main.css" },
+				{ from: "./src/images", to: "./images" },
 				// { from: "./src/models", to: "./models" },
 				// { from: "./src/sounds", to: "./sounds" }
 			],
 		})
-	]
+	],
+	devServer: {
+    static: {
+      directory: path.join(__dirname, 'public'),
+    },
+    compress: true,
+    port: 9000,
+  },
 };
