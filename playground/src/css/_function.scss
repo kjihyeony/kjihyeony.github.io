@@ -1,0 +1,30 @@
+// px => vw
+@function large-vw($font){
+  $vw-context: $dec-viewport * 0.01 * 1px;
+  @return $font / $vw-context * 1vw;
+  @return $font;
+}
+
+@function pad-vw($font){
+    $vw-context: $pad-viewport * 0.01 * 1px;
+    @return $font / $vw-context * 1vw;
+    @return $font;
+}
+
+@function small-vw($font){
+  $vw-context: $portrait-viewport * 0.01 * 1px;
+  @return $font / $vw-context * 1vw;
+  @return $font;
+}
+
+@function xsmall-vw($font){
+    $vw-context: $mobile-viewport * 0.01 * 1px;
+    @return $font / $vw-context * 1vw;
+    @return $font;
+}
+
+@function xxsmall-vw($font){
+  $vw-context: $xmobile-viewport * 0.01 * 1px;
+  @return $font / $vw-context * 1vw;
+  @return $font;
+}
