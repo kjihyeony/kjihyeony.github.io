@@ -3,6 +3,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 
+const pages = ["a", "b"];
+
 module.exports={
   //진입점
   entry: './src/index.js',
@@ -38,7 +40,12 @@ module.exports={
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './html/index.html'
+      template: './html/index.html',
+      filename: 'index.html'
+    }),
+    new HtmlWebpackPlugin({
+      template: './html/contact.html',
+      filename: 'contact.html'
     }),
     new MiniCssExtractPlugin({
       filename: "common.css",
