@@ -1,6 +1,19 @@
 /* page load anumation*/
 body{
   font-size: 20px;
+  --page-background: #fff;
+  background-color: var(--page-background);
+}
+
+.height100 {
+  height: 100vh;
+
+  &.is-home {
+    background-color: aqua;
+  }
+  &.is-contact {
+    background-color: pink;
+  }
 }
 
 .main-once {
@@ -15,27 +28,26 @@ body{
   opacity: 1;
 }
 
-/* page slide anumation*/
-
+/* how to leave */
 .fade-leave {
   opacity: 1;
 }
 
 .fade-leave-active {
-  transition: opacity 2s linear;
+  transition: opacity 1s linear;
 }
 
 .fade-leave-to {
   opacity: 0;
 }
 
-
+/* how to enter */
 .fade-enter {
   opacity: 0;
 }
 
 .fade-ente-active {
-  transition: opacity 2s linear;
+  transition: opacity 1s linear;
 }
 
 .fade-ente-to {
