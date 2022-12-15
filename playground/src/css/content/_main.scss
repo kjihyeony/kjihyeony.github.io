@@ -3,16 +3,41 @@ body{
   font-size: 20px;
 }
 
-.barba-once {
+.main-once {
   opacity: 0;
 }
 
-.barba-once-active {
-  transition: opacity 2s linear;
+.main-once-active {
+  transition: opacity 1s linear;
 }
 
-.barba-once-to {
+.main-once-to {
   opacity: 1;
 }
 
-/* slide ti home */
+/* page slide anumation*/
+
+.fade-leave {
+  opacity: 1;
+}
+
+.fade-leave-active {
+  transition: opacity 2s linear;
+}
+
+.fade-leave-to {
+  opacity: 0;
+}
+
+
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-ente-active {
+  transition: opacity 2s linear;
+}
+
+.fade-ente-to {
+  opacity: 1;
+}
