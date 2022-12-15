@@ -1,3 +1,18 @@
-body {
-  // font-size: 40px;
+/* page load anumation*/
+body{
+  font-size: 20px;
 }
+
+.barba-once {
+  opacity: 0;
+}
+
+.barba-once-active {
+  transition: opacity 2s linear;
+}
+
+.barba-once-to {
+  opacity: 1;
+}
+
+/* slide ti home */

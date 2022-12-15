@@ -3,8 +3,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 
-const pages = ["a", "b"];
-
 module.exports={
   //진입점
   entry: './src/index.js',
@@ -36,7 +34,13 @@ module.exports={
         test: /\.svg$/i,
         use: ['@svgr/webpack'],
       },
+      {
+        test: /\.js$/,
+        enforce: "pre",
+        use: ["source-map-loader"],
+      },
     ],
+
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -57,5 +61,5 @@ module.exports={
       directory: path.resolve(__dirname, "dist"),
     },
     port: 8080,
-  }
+  },
 }
