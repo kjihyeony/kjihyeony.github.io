@@ -44,6 +44,19 @@ barba.init({
       leave() {},
       //next page when entering when we are goimg fro, the first page to the second page
       enter() {},
+    },
+    {
+      name: 'clip',
+      sync: true,
+      to: {
+        namespace: ['clip']
+      },
+      leave() {},
+      //next page when entering when we are goimg fro, the first page to the second page
+      enter() {},
+      beforeEnter() {
+        console.log('beforEnter' );
+      }
     }
 
   ]
