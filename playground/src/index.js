@@ -30,7 +30,7 @@ barba.init({
   },{
       name: 'fade',
       to: {
-        namespace: ['fade']
+        namespace: ['fade']  
       },
       leave() {},
       //next page when entering when we are goimg fro, the first page to the second page
@@ -57,6 +57,15 @@ barba.init({
       beforeEnter() {
         console.log('beforEnter' );
       }
+    },
+    {
+      name: 'with-cover',
+      to: {
+        namespace: ['with-cover']
+      },
+      leave() {},
+      enter() {},
+      //next page when entering when we are goimg fro, the first page to the second page
     }
 
   ]
