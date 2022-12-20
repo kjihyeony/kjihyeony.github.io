@@ -5,11 +5,13 @@ body{
   background-color: var(--page-background);
 }
 
+/* barba test */
+
 .height100 {
   height: 100vh;
 
   &.is-home {
-    background-color: aqua;
+    background-color: #fff;
   }
   &.is-contact {
     background-color: pink;
@@ -21,23 +23,6 @@ body{
     a {
       color: #fff;
     }
-  }
-}
-.is-cover {
-  width: 100%;
-
-  .transition {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background-color: #c8cc98;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transform: translateY(-100%);
-    z-index: 1
   }
 }
 
@@ -129,8 +114,8 @@ body{
 }
 /*cover in*/
 .with-cover-leave .transition {
-  transform: translateY(-100%); 
-} 
+  transform: translateY(-100%);
+}
 
 .with-cover-leave-to .transition {
   transform: translateY(0);
@@ -141,4 +126,43 @@ body{
 }
 .with-cover-enter-to .transition {
   transform: translateY(100%);
+}
+
+
+/* logo animation test */
+nav {
+  display: none;
+}
+
+.mainLetter {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &-inner {
+    position: relative;
+  }
+
+  &-0,
+  &-1 {
+    span {
+      display: inline-block;
+      font-size: 15vw;
+      font-weight: bold;
+      color: #eee;
+    }
+  }
+
+  &-0 {
+    position: absolute;
+    top: 0;
+    left: 5vw;
+    overflow: hidden;
+  }
+
+  &-1 {
+    
+  }
 }
