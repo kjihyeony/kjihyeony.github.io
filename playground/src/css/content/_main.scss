@@ -143,6 +143,7 @@ nav {
 
   &-inner {
     position: relative;
+    overflow: hidden;
   }
 
   &-0,
@@ -150,8 +151,10 @@ nav {
     span {
       display: inline-block;
       font-size: 15vw;
+      line-height: 0.87;
       font-weight: bold;
       color: #eee;
+      transition-timing-function: ease-out;
     }
   }
 
@@ -160,9 +163,20 @@ nav {
     top: 0;
     left: 5vw;
     overflow: hidden;
+    .ani-logo {
+      position: fixed;
+      width: 140px;
+      height: 140px;
+      background-color: #eee;
+      border-top-left-radius: 50%;
+      border-top-right-radius: 50%;
+      border-bottom-right-radius: 20% ;
+      transform-origin: bottom left;
+    }
+
   }
 
   &-1 {
-    
+  
   }
 }
