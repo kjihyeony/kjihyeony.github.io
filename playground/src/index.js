@@ -1,16 +1,22 @@
 import barba from '@barba/core';
 import barbaCss from '@barba/css';
 import gsap from 'gsap';
+import { Showcase } from "./js/Showcase"
+import { Slides } from './js/Slides';
 import './css/style.scss'
 
-import WaterTexture from './js/pages/WaterTexture';
+
+
+import * as THREE from "three";
+
+
+import bg1 from './images/img-effect-1.jpg';
+import bg2 from './images/img-effect-2.jpg';
+import bg3 from './images/img-effect-3.jpg';
 
 
 //tell Barba to use the css plugin
 barba.use(barbaCss);
-
-const body = document.querySelector('body');
-
 
 //init Barba
 // barba.init({
@@ -29,42 +35,66 @@ let tl = gsap.timeline(); //create the timeline
 // .to('.ani-t3',{y:80, duration:0.5})
 
 tl.fromTo(".ani-t", {
-    y: 190,
-  },
+  y: 190,
+}, {
+  y: 0,
+  stagger: {
+    each: 0.1,
+    from: 'left'
+  }
+}).fromTo(".ani-logo", {
+  y: 190,
+  scale: 0
+}, {
+  y: 0,
+  scale: 1,
+  duration: 0.5
+}, "-=0.3").to(".ani-t", {
+  y: 190,
+  stagger: {
+    each: 0.1,
+    from: 'left'
+  }
+}).to(".ani-logo", {
+  left: '30%',
+})
+
+
+const image1 = bg1;
+const image2 = bg2;
+const image3 = bg3;
+
+let images = [image1, image2, image3];
+
+const slidesData = [
   {
-    y:0,
-    stagger:{
-      each: 0.1,
-      from: 'left'
-    }
+    image: bg1,
+    title: "Segovia",
+    meta: "Spain / Castile and León"
   }
-).fromTo(".ani-logo",{
-    y: 190,
-    scale: 0
-  },{
-    y:0,
-    scale: 1,
-    duration: 0.5
-  }
-, "-=0.3"
-).to(".ani-t",{
-    y: 190,
-    stagger: {
-      each: 0.1,
-      from: 'left'
-    }
-  }
-).to(".ani-logo",{
-    left: '30%',
-  }
-)
+];
 
 
 const bgAnimation = document.getElementById('texture');
-if(bgAnimation){
-  console.log('dd');
-  WaterTexture ();
+const container = document.getElementById("app");
+const slides = new Slides(slidesData);
+const showcase = new Showcase(slidesData);
+if (bgAnimation) {
+  showcase.mount(container);
+  slides.mount(container);
+  showcase.render();
+
+  window.addEventListener("resize", function() {
+    showcase.onResize();
+  });
+
+  window.addEventListener("mousemove", function(ev) {
+    showcase.onMouseMove(ev);
+  });
+
 }
+
+
 
 
 

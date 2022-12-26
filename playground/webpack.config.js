@@ -10,6 +10,7 @@ module.exports={
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, "dist"),
+    publicPath: '/',
   },
   module: {
     rules: [
@@ -67,7 +68,9 @@ module.exports={
   devServer: {
     static: {
       directory: path.resolve(__dirname, "dist"),
+      publicPath: "/"
     },
     port: 8080,
+
   },
 }

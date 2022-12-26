@@ -1,0 +1,37 @@
+const createEleWithClass = (tag, className) => {
+  const ele = document.createElement(tag);
+  ele.className = className;
+  return ele;
+};
+
+class Slides {
+  constructor(data) {
+    this.data = data;
+    this.container = createEleWithClass("div", "slides");
+    this.currentIdx = 0;
+    this.slides = this.data.map((entry, index) => {
+      const slide = createEleWithClass("div", "slide");
+      const title = createEleWithClass("h1", "slide-title");
+      const meta = createEleWithClass("p", "slide-meta");
+      const more = createEleWithClass("a", "slide-more");
+      more.href = "#";
+      slide.classList.add(index !== 0 ? "next" : "show-meta");
+      meta.innerHTML = entry.meta;
+      title.innerHTML = entry.title;
+      more.innerHTML = 'Read more';
+      slide.appendChild(meta);
+      slide.appendChild(title);
+      slide.appendChild(more);
+      this.container.appendChild(slide);
+      return slide;
+    });
+  }
+  mount(container) {
+    container.appendChild(this.container);
+  }
+
+}
+
+export {
+  Slides
+};
