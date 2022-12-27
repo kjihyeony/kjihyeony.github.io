@@ -1,6 +1,7 @@
 import barba from '@barba/core';
 import barbaCss from '@barba/css';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Showcase } from "./js/Showcase"
 import { Slides } from './js/Slides';
 import { Curtains,
@@ -10,6 +11,12 @@ import { Curtains,
 import * as dat from 'dat.gui';
 import './css/style.scss'
 
+gsap.registerPlugin(ScrollTrigger);
+
+import Swup from 'swup';
+import SwupOverlayTheme from '@swup/overlay-theme';
+
+import Lenis from '@studio-freight/lenis'
 
 
 import * as THREE from "three";
@@ -21,12 +28,16 @@ import bg3 from './images/img-effect-3.jpg';
 
 
 //tell Barba to use the css plugin
-barba.use(barbaCss);
+// barba.use(barbaCss);
 
 //init Barba
 // barba.init({
 
 // });
+
+const swup = new Swup();
+
+
 let tl = gsap.timeline(); //create the timeline
 
 // gsap.fromTo('.ani-t1',{y:50},{y:0, duration:1});
@@ -39,30 +50,30 @@ let tl = gsap.timeline(); //create the timeline
 // .to('.ani-t2',{y:80, duration:0.5})
 // .to('.ani-t3',{y:80, duration:0.5})
 
-tl.fromTo(".ani-t", {
-  y: 190,
-}, {
-  y: 0,
-  stagger: {
-    each: 0.1,
-    from: 'left'
-  }
-}).fromTo(".ani-logo", {
-  y: 190,
-  scale: 0
-}, {
-  y: 0,
-  scale: 1,
-  duration: 0.5
-}, "-=0.3").to(".ani-t", {
-  y: 190,
-  stagger: {
-    each: 0.1,
-    from: 'left'
-  }
-}).to(".ani-logo", {
-  left: '30%',
-})
+// tl.fromTo(".ani-t", {
+//   y: 190,
+// }, {
+//   y: 0,
+//   stagger: {
+//     each: 0.1,
+//     from: 'left'
+//   }
+// }).fromTo(".ani-logo", {
+//   y: 190,
+//   scale: 0
+// }, {
+//   y: 0,
+//   scale: 1,
+//   duration: 0.5
+// }, "-=0.3").to(".ani-t", {
+//   y: 190,
+//   stagger: {
+//     each: 0.1,
+//     from: 'left'
+//   }
+// }).to(".ani-logo", {
+//   left: '30%',
+// })
 
 
 const image1 = bg1;
@@ -115,104 +126,42 @@ if(rippleTest) {
    const lastMouse = mouse.clone();
    const velocity = new Vec2();
 
-   function onMouseMove(e) {
-     lastMouse.copy(mouse);
-
-     // touch event
-     if (e.targetTouches) {
-       mouse.set(e.targetTouches[0].clientX, e.targetTouches[0].clientY);
-     } else {
-       mouse.set(e.clientX, e.clientY);
-     }
-
-     velocity.set((mouse.x - lastMouse.x) / 16, (mouse.y - lastMouse.y) / 16);
-
-     updateVelocity = true;
-   }
-
-   window.addEventListener("mousemove", onMouseMove);
-   window.addEventListener("touchmove", onMouseMove, {
-     passive: true,
-   });
-
-   const planeElement = document.getElementById("flowmap");
-
-   // parameters
-   const flowMapParams = {
-     sampler: "uFlowMap",
-     vertexShader: flowmapVs,
-     fragmentShader: flowmapFs,
-     texturesOptions: {
-       floatingPoint: "half-float",
-     },
-     uniforms: {
-       mousePosition: {
-         name: "uMousePosition",
-         type: "2f",
-         value: mouse,
-       },
-       fallOff: {
-         name: "uFalloff",
-         type: "1f",
-         value: ww > wh ? ww / 10000 : wh / 10000,
- 
-         // we can change what i want here
-       },
-       cursorGrow: {
-         name: "uCursorGrow",
-         type: "1f",
-         value: 1.15,
-       },
-       // alpha of the cursor
-       alpha: {
-         name: "uAlpha",
-         type: "1f",
-         value: 1.14,
-       },
-       dissipation: {
-         name: "uDissipation",
-         type: "1f",
-         value: 0.925,
-       },
-       velocity: {
-         name: "uVelocity",
-         type: "2f",
-         value: velocity,
-       },
-       aspect: {
-         name: "uAspect",
-         type: "1f",
-         value: ww / wh,
-       },
-     },
-   };
-   const flowMap = new PingPongPlane(curtains, planeElement, flowMapParams);
-
-   flowMap.onRender(() => {
-     // update mouse position
-     flowMap.uniforms.mousePosition.value = flowMap.mouseToPlaneCoords(mouse);
- 
-     flowMap.uniforms.velocity.value = new Vec2(
-       curtains.lerp(velocity.x, 0.5, 1.5),
-       curtains.lerp(velocity.y, 0.5, 1.5)
-     );
-   });
-   // add displacements shader
-   const params = {
-     vertexShader: displacementVs,
-     fragmentShader: displacementFs,
-   };
-   // create plane
-   const plane = new Plane(curtains, planeElement, params);
- 
-   // create a texture that will hold our flowmap
-   const flowTexture = plane.createTexture({
-     sampler: "uFlowTexture",
-     fromTexture: flowMap.getTexture(), // set it based on our PingPongPlane flowmap plane's texture
-   });
-
 }
 
 
 
+const lenis = new Lenis({
+  lerp: 0.1,
+  smooth: true,
+});
+const scrollFn = (time) => {
+  lenis.raf(time);
+  requestAnimationFrame(scrollFn);
+};
+requestAnimationFrame(scrollFn);
+
+const paths = [...document.querySelectorAll('path.path-anim')];
+
+
+
+// Animate the d attribute (path initial ) tothe value in data-path-to;
+// start when the top of its SVG reaches the bottom of the viewport and
+// end when the bottom of its SVG reaches the top of the viewport
+paths.forEach(el => {
+  const svgEl = el.closest('svg');
+  const pathTo = el.dataset.pathTo;
+
+  gsap.timeline({
+      scrollTrigger: {
+          trigger: svgEl,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true
+      }
+  })
+  .to(el, {
+      ease: 'none',
+      attr: { d: pathTo }
+  });
+});
 
