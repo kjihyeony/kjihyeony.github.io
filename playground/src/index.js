@@ -2,6 +2,7 @@ import barba from '@barba/core';
 import barbaCss from '@barba/css';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import { Showcase } from "./js/Showcase"
 import { Slides } from './js/Slides';
 import { Curtains,
@@ -12,6 +13,7 @@ import * as dat from 'dat.gui';
 import './css/style.scss'
 
 gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollToPlugin);
 
 import Swup from 'swup';
 import SwupOverlayTheme from '@swup/overlay-theme';
@@ -155,20 +157,22 @@ paths.forEach(el => {
 
   gsap.timeline({
       scrollTrigger: {
-          trigger: svgEl,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: true,
+        trigger: svgEl,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true,
       }
-  })
-  .to(el, {
+    })
+    .to(el, {
       ease: 'none',
-      attr: { d: pathTo }
-  });
+      attr: {
+        d: pathTo
+      }
+    });
 });
 
 const ogl = document.getElementById('ogl');
-if(ogl){
+if (ogl) {
   const vertex = /* glsl */ `
   attribute vec2 uv;
   attribute vec2 position;
@@ -199,29 +203,30 @@ if(ogl){
       gl_FragColor.rgb = tex;
       gl_FragColor.a = 1.0;
   }
-  `;
-  {
-    const renderer = new Renderer({ dpr: 2 });
+  `; {
+    const renderer = new Renderer({
+      dpr: 2
+    });
     const gl = renderer.gl;
-    document.body.appendChild(gl.canvas).setAttribute("id", "canvas-ogl");;
+    const oglEl = document.querySelector('.ogl-box');
+    document.querySelector('.ogl-box').appendChild(gl.canvas).setAttribute("id", "canvas-ogl");;
 
     // Variable inputs to control flowmap
     let aspect = 1;
     const mouse = new Vec2(-1);
     const velocity = new Vec2();
 
-    const oglEl = document.querySelector('.ogl-box');
 
     console.log(oglEl);
     const oglElWidth = oglEl.offsetWidth;
     const oglElHiehgt = oglEl.offsetHeight;
 
     function resize() {
-        renderer.setSize(oglElWidth,oglElHiehgt);
-        aspect = oglElWidth / oglElHiehgt;
+      renderer.setSize(oglElWidth, oglElHiehgt);
+      aspect = oglElWidth / oglElHiehgt;
     }
 
-   
+
     window.addEventListener('resize', resize, false);
     resize();
 
@@ -230,100 +235,162 @@ if(ogl){
     // Triangle that includes -1 to 1 range for 'position', and 0 to 1 range for 'uv'.
     const geometry = new Triangle(gl);
 
-    const texture = new Texture(gl, { wrapS: gl.REPEAT, wrapT: gl.REPEAT });
+    const texture = new Texture(gl, {
+      wrapS: gl.REPEAT,
+      wrapT: gl.REPEAT
+    });
     const img = new Image();
     img.onload = () => (texture.image = img);
     img.src = bg1;
 
     const program = new Program(gl, {
-        vertex,
-        fragment,
-        uniforms: {
-            uTime: { value: 0 },
-            tWater: { value: texture },
-
-            // Note that the uniform is applied without using an object and value property
-            // This is because the class alternates this texture between two render targets
-            // and updates the value property after each render.
-            tFlow: flowmap.uniform,
+      vertex,
+      fragment,
+      uniforms: {
+        uTime: {
+          value: 0
         },
+        tWater: {
+          value: texture
+        },
+
+        // Note that the uniform is applied without using an object and value property
+        // This is because the class alternates this texture between two render targets
+        // and updates the value property after each render.
+        tFlow: flowmap.uniform,
+      },
     });
 
-    const mesh = new Mesh(gl, { geometry, program });
+    const mesh = new Mesh(gl, {
+      geometry,
+      program
+    });
 
     // Create handlers to get mouse position and velocity
     const isTouchCapable = 'ontouchstart' in window;
     if (isTouchCapable) {
-        window.addEventListener('touchstart', updateMouse, false);
-        window.addEventListener('touchmove', updateMouse, false);
+      window.addEventListener('touchstart', updateMouse, false);
+      window.addEventListener('touchmove', updateMouse, false);
     } else {
-        window.addEventListener('mousemove', updateMouse, false);
+      window.addEventListener('mousemove', updateMouse, false);
     }
 
     let lastTime;
     const lastMouse = new Vec2();
+
     function updateMouse(e) {
-        if (e.changedTouches && e.changedTouches.length) {
-            e.x = e.changedTouches[0].pageX;
-            e.y = e.changedTouches[0].pageY;
-        }
-        if (e.x === undefined) {
-            e.x = e.pageX;
-            e.y = e.pageY;
-        }
+      if (e.changedTouches && e.changedTouches.length) {
+        e.x = e.changedTouches[0].pageX;
+        e.y = e.changedTouches[0].pageY;
+      }
+      if (e.x === undefined) {
+        e.x = e.pageX;
+        e.y = e.pageY;
+      }
 
-        // Get mouse value in 0 to 1 range, with y flipped
-        mouse.set(e.x / gl.renderer.width, 1.0 - e.y / gl.renderer.height);
+      // Get mouse value in 0 to 1 range, with y flipped
+      mouse.set(e.x / gl.renderer.width, 1.0 - e.y / gl.renderer.height);
 
-        // Calculate velocity
-        if (!lastTime) {
-            // First frame
-            lastTime = performance.now();
-            lastMouse.set(e.x, e.y);
-        }
-
-        const deltaX = e.x - lastMouse.x;
-        const deltaY = e.y - lastMouse.y;
-
+      // Calculate velocity
+      if (!lastTime) {
+        // First frame
+        lastTime = performance.now();
         lastMouse.set(e.x, e.y);
+      }
 
-        let time = performance.now();
+      const deltaX = e.x - lastMouse.x;
+      const deltaY = e.y - lastMouse.y;
 
-        // Avoid dividing by 0
-        let delta = Math.max(14, time - lastTime);
-        lastTime = time;
+      lastMouse.set(e.x, e.y);
 
-        velocity.x = deltaX / delta;
-        velocity.y = deltaY / delta;
+      let time = performance.now();
 
-        // Flag update to prevent hanging velocity values when not moving
-        velocity.needsUpdate = true;
+      // Avoid dividing by 0
+      let delta = Math.max(14, time - lastTime);
+      lastTime = time;
+
+      velocity.x = deltaX / delta;
+      velocity.y = deltaY / delta;
+
+      // Flag update to prevent hanging velocity values when not moving
+      velocity.needsUpdate = true;
     }
 
     requestAnimationFrame(update);
+
     function update(t) {
-        requestAnimationFrame(update);
+      requestAnimationFrame(update);
 
-        // Reset velocity when mouse not moving
-        if (!velocity.needsUpdate) {
-            mouse.set(-1);
-            velocity.set(0);
-        }
-        velocity.needsUpdate = false;
+      // Reset velocity when mouse not moving
+      if (!velocity.needsUpdate) {
+        mouse.set(-1);
+        velocity.set(0);
+      }
+      velocity.needsUpdate = false;
 
-        // Update flowmap inputs
-        flowmap.aspect = aspect;
-        flowmap.mouse.copy(mouse);
+      // Update flowmap inputs
+      flowmap.aspect = aspect;
+      flowmap.mouse.copy(mouse);
 
-        // Ease velocity input, slower when fading out
-        flowmap.velocity.lerp(velocity, velocity.len() ? 0.5 : 0.1);
+      // Ease velocity input, slower when fading out
+      flowmap.velocity.lerp(velocity, velocity.len() ? 0.5 : 0.1);
 
-        flowmap.update();
+      flowmap.update();
 
-        program.uniforms.uTime.value = t * 0.001;
+      program.uniforms.uTime.value = t * 0.001;
 
-        renderer.render({ scene: mesh });
+      renderer.render({
+        scene: mesh
+      });
     }
   }
 }
 
+// const animateIn = gsap.timeline({
+//   scrollTrigger: {
+//     scrollTrigger: ".black",
+//     start:"center center",
+//     markers: "true",
+//     toggleActions: "play none none reverse",
+//   }
+// });
+
+// animateIn.fromTo(".wave-bg",{
+//     yPercent: 100,
+//   },{
+//     yPercent: -30,
+//     ease: "power4",
+//     duration: 0.3
+//   }
+// )
+
+class waveWrap {
+  constructor(){
+    this.canvas = document.createElement('canvas');
+    this.ctx = this.canvas.getContext('2d');
+    document.body.appendChild(this.canvas);
+
+    window.addEventListener('resize', this.resize.bind(this), false);
+    this.resize();
+
+    requestAnimationFrame(this.animate.bind(this));
+  }
+  
+  resize(){
+    this.stageWidth = document.body.clientWidth;
+    this.stageHeight = document.body.clientHeight;
+
+    this.canvas.width = this.stageWidth * 2;
+    this.canvas.height = this.stageHeight * 2;
+    this.ctx.scale(2, 2);
+  }
+
+  animate(t){
+    this.ctx.clearRect(0,0,this.stageWidth, this.stageHeight);
+    requestAnimationFrame(this.animation.bind(this));
+  }
+}
+
+window.onload = () => {
+  new waveWrap();
+}
