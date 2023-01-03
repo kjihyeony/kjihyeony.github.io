@@ -29,6 +29,8 @@ import {Renderer, Program, Texture, Mesh, Vec2, Flowmap, Triangle} from 'ogl';
 import bg1 from './images/img-effect-1.jpg';
 import bg2 from './images/img-effect-2.jpg';
 import bg3 from './images/img-effect-3.jpg';
+import { Wave } from './js/func/wave';
+import { WaveGroup } from './js/func/wavegroup';
 
 
 //tell Barba to use the css plugin
@@ -195,7 +197,8 @@ if (ogl) {
       // B value is the velocity length
       vec3 flow = texture2D(tFlow, vUv).rgb;
       // Use flow to adjust the uv lookup of a texture
-      vec2 uv = gl_FragCoord.xy / 600.0;
+      //이미지의 비율이 변함
+      vec2 uv = gl_FragCoord.xy / 1600.0;
       uv += flow.xy * 0.05;
       vec3 tex = texture2D(tWater, uv).rgb;
       // Oscillate between raw values and the affected texture above
@@ -217,7 +220,6 @@ if (ogl) {
     const velocity = new Vec2();
 
 
-    console.log(oglEl);
     const oglElWidth = oglEl.offsetWidth;
     const oglElHiehgt = oglEl.offsetHeight;
 
@@ -346,51 +348,238 @@ if (ogl) {
   }
 }
 
-// const animateIn = gsap.timeline({
-//   scrollTrigger: {
-//     scrollTrigger: ".black",
-//     start:"center center",
-//     markers: "true",
-//     toggleActions: "play none none reverse",
-//   }
-// });
-
-// animateIn.fromTo(".wave-bg",{
-//     yPercent: 100,
-//   },{
-//     yPercent: -30,
-//     ease: "power4",
-//     duration: 0.3
-//   }
-// )
-
 class waveWrap {
-  constructor(){
+  /* 생성자 */
+  constructor() {
+    /* 캔버스 엘리먼트 생성 */
     this.canvas = document.createElement('canvas');
-    this.ctx = this.canvas.getContext('2d');
-    document.body.appendChild(this.canvas);
+    this.canvasParent = document.getElementById('wave');
 
-    window.addEventListener('resize', this.resize.bind(this), false);
+    /*
+    Canvas는 getContext() 메소드를 이용해서 렌더링 컨텍스트와
+    렌더링 컨텍스트의 그리기 함수들을 사용할 수 있습니다.
+
+    getContext() 메소드는 렌더링 컨텍스트 타입을 지정하는
+    하나의 파라메터를 가집니다.
+
+    여기서는 `CanvasRenderingContext2D`를 얻기 위해 '2d'로 지정합니다.
+    https://developer.mozilla.org/ko/docs/Web/HTML/Canvas/Tutorial/Basic_usage
+    */
+    this.ctx = this.canvas.getContext('2d');
+
+    /* 현재 html 문서의 body에 캔버스 엘리먼트 추가하기 */
+
+    this.canvasParent.appendChild(this.canvas);
+
+    /*
+    사이즈가 변할 때 대응하기 위한 이벤트 리스너
+
+    추가 : once, passive, capture 등에 대한 설명
+    http://sculove.github.io/blog/2016/12/29/addEventListener-passive/
+    https://joshua1988.github.io/web-development/javascript/event-propagation-delegation/
+    */
+    window.addEventListener('resize', this.resize.bind(this), {
+      once: false,
+      passive: false,
+      capture: false,
+    });
+
+    /* 웨이브 객체 생성 */
+    // this.wave = new Wave();
+    this.WaveGroup = new WaveGroup();
+
+    /* 초기 사이즈를 기준으로 resize 함수 실행 */
     this.resize();
 
+    /*
+    requestAnimationFrame은 css로 처리하기 어려운 애니메이션이나
+    Canvas, SVG 등의 애니메이션 구현에 이용하는 함수
+    setInterval과 흡사한데, 재귀적으로 자신을 호출한다는 점이 다름
+    1초당 디스플레이 주사율에 따라 정해진 프레임을 렌더링해줌
+    https://blog.eunsatio.io/develop/JavaScript-window.requestAnimationFrame-%ED%8A%9C%ED%86%A0%EB%A6%AC%EC%96%BC
+    https://css-tricks.com/using-requestanimationframe/
+    */
     requestAnimationFrame(this.animate.bind(this));
   }
-  
-  resize(){
+
+  /* 사이즈가 변했을 때 실행될 콜백 */
+  resize() {
+    /* 레티나 디스플레이에서 올바른 화면을 보여주기 위해 설정 */
     this.stageWidth = document.body.clientWidth;
     this.stageHeight = document.body.clientHeight;
 
+    /* 캔버스의 크기를 스테이지의 2배로 잡음 */
     this.canvas.width = this.stageWidth * 2;
     this.canvas.height = this.stageHeight * 2;
+
+    /*
+    캔버스에서 1개의 픽셀이 차지할 크기를 정함
+    크기를 2배로 늘렸으므로 각 픽셀이 2개씩 차지하도록 함
+    https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/scale
+    */
     this.ctx.scale(2, 2);
+
+    /* 웨이브에도 리사이즈가 적용 되도록 설정 */
+    this.WaveGroup.resize(this.stageWidth, this.stageHeight);
   }
 
-  animate(t){
-    this.ctx.clearRect(0,0,this.stageWidth, this.stageHeight);
-    requestAnimationFrame(this.animation.bind(this));
+  /* 애니메이션 관련 루틴 정의 */
+  animate(t) {
+    /* 지정된 사각 영역을 rgba(0, 0, 0, 0)의 색상으로 만듦 */
+    this.ctx.clearRect(0, 0, this.stageWidth, this.stageHeight);
+    /* 애니메이션이 실행되면 웨이브가 그려지도록 설정 */
+    this.WaveGroup.draw(this.ctx);
+    /* this를 바인드한 채로 애니메이션 프레임 요청 */
+    requestAnimationFrame(this.animate.bind(this));
   }
 }
 
-window.onload = () => {
-  new waveWrap();
+// new waveWrap();
+
+const wave = document.getElementById('wave');
+  if(wave){
+    window.onload = () => {
+      new waveWrap();
+  }
+
+  const animateIn = gsap.timeline({
+    scrollTrigger: {
+      scrollTrigger: ".waveWrap",
+      start:"center center",
+      markers: "true",
+      toggleActions: "play none none reverse",
+    }
+  });
+
+  animateIn.fromTo(".waveWrap",{
+      yPercent: 120,
+    },{
+      yPercent: -40,
+      ease: "power4",
+      duration: 0.4
+    }
+  )
+}
+
+const create = document.getElementById('create');
+
+if(create) {
+  const panelEls = Array.from(document.querySelectorAll('.panels'))
+
+  ScrollTrigger.create({
+    trigger: create,
+    start: "top top",
+    pin: true,
+    // end: '+=5000',
+    end: "+=550%",
+    pinSpacing: false,
+    markers: {
+      startColor: 'yellow',
+      endColor: 'yellow'
+    }
+  });
+
+  let createAni = gsap.timeline({
+    scrollTrigger: {
+      scrollTrigger: create,
+      scrub: 1,
+      start: "center-=800 center+=150",
+      end: "+=150%",
+      markers: 'true',
+      smooth: 1,
+    }
+  }).to('.create-title-1', {
+    y: -10,
+    opacity: 1,
+    duration: 5,
+  }).to('.create-title-2', {
+    y: -10,
+    opacity: 1,
+    duration: 5,
+  }, "<+=2").to('.create-title-3', {
+    y: -10,
+    opacity: 1,
+    duration: 5,
+  }, "<+=3.5").to('.create-more-link', {
+    y: 50,
+    opacity: 1,
+    duration: 2,
+  }, "<+=4")
+
+  gsap.to(".create-card-1", {
+    rotation: "30deg",
+    y: "-10%",
+    x: "100%",
+    ease: "none",
+    scrollTrigger: {
+      trigger: ".create-card-1",
+      start: "top bottom",
+      end: "+=" + 2 * window.innerHeight + "px",
+      scrub: !0
+    }
+  })
+
+  gsap.to(".create-card-2", {
+    rotation: "-30deg",
+    y: "50%",
+    x: "20%",
+    ease: "none",
+    scrollTrigger: {
+      trigger: ".create-card-2",
+      start: "top bottom",
+      end: "+=" + 2.6 * window.innerHeight + "px",
+      scrub: !0
+    }
+  });
+
+  gsap.to(".create-card-3", {
+    rotation: "40deg",
+    y: "30%",
+    x: "-90%",
+    ease: "none",
+    scrollTrigger: {
+      trigger: ".create-card-2",
+      start: "top 50%",
+      end: "+=" + 2.4 * window.innerHeight + "px",
+      scrub: !0
+    }
+  });
+
+
+  var f = document.querySelector(".culture-wrap").clientWidth - window.innerWidth;
+  gsap.to(".culture-wrap", {
+      x: -1 * f + "px",
+      ease: "none",
+      scrollTrigger: {
+          trigger: ".culture-wrap",
+          top: "top top",
+          end: "+=" + f + "px",
+          scrub: true,
+          pin: true
+      }
+  });
+
+  document.querySelectorAll(".cultureDiv").forEach((function(t) {
+    var e = {};
+    e.x = (Math.floor(21 * Math.random()) + 30) * (2 * Math.round(Math.random()) - 1),
+    e.y = (Math.floor(7 * Math.random()) + 10) * (2 * Math.round(Math.random()) - 1),
+    e.rota = (Math.floor(11 * Math.random()) + 10) * (2 * Math.round(Math.random()) - 1),
+    gsap.fromTo(t, {
+        xPercent: e.x,
+        yPercent: e.y,
+        rotate: e.rota
+    }, {
+        xPercent: -e.x,
+        yPercent: -e.y,
+        rotate: -e.rota,
+        ease: "none",
+        scrollTrigger: {
+            trigger: ".culture-wrap",
+            start: "top top-=" + (t.getBoundingClientRect().left - t.clientWidth - window.innerWidth),
+            end: "+=" + (window.innerWidth + 3 * t.clientWidth) + "px",
+            scrub: !0
+        }
+    })
+}
+));
 }
