@@ -504,7 +504,7 @@ if(create) {
     y: 50,
     opacity: 1,
     duration: 2,
-  }, "<+=4")
+  }, "<+=4");
 
   gsap.to(".create-card-1", {
     rotation: "30deg",
@@ -559,27 +559,27 @@ if(create) {
       }
   });
 
-  document.querySelectorAll(".cultureDiv").forEach((function(t) {
-    var e = {};
-    e.x = (Math.floor(21 * Math.random()) + 30) * (2 * Math.round(Math.random()) - 1),
-    e.y = (Math.floor(7 * Math.random()) + 10) * (2 * Math.round(Math.random()) - 1),
-    e.rota = (Math.floor(11 * Math.random()) + 10) * (2 * Math.round(Math.random()) - 1),
-    gsap.fromTo(t, {
-        xPercent: e.x,
-        yPercent: e.y,
-        rotate: e.rota
-    }, {
-        xPercent: -e.x,
-        yPercent: -e.y,
-        rotate: -e.rota,
-        ease: "none",
-        scrollTrigger: {
-            trigger: ".culture-wrap",
-            start: "top top-=" + (t.getBoundingClientRect().left - t.clientWidth - window.innerWidth),
-            end: "+=" + (window.innerWidth + 3 * t.clientWidth) + "px",
-            scrub: !0
-        }
-    })
-}
-));
+    document.querySelectorAll(".culture-card-box").forEach((function(t) {
+      var e = {};
+      e.x = (Math.floor(21 * Math.random()) + 30) * (2 * Math.round(Math.random()) - 1),
+      e.y = (Math.floor(7 * Math.random()) + 10) * (2 * Math.round(Math.random()) - 1),
+      e.rota = (Math.floor(11 * Math.random()) + 10) * (2 * Math.round(Math.random()) - 1),
+      gsap.fromTo(t, {
+          xPercent: e.x,
+          yPercent: e.y,
+          rotate: e.rota
+      }, {
+          xPercent: -e.x,
+          yPercent: -e.y,
+          rotate: -e.rota,
+          ease: "none",
+          scrollTrigger: {
+              trigger: ".culture",
+              start: "top top-=" + (t.getBoundingClientRect().left - t.clientWidth - window.innerWidth),
+              end: "+=" + (window.innerWidth + 3 * t.clientWidth) + "px",
+              scrub: !0
+          }
+      })
+    }
+  ));
 }

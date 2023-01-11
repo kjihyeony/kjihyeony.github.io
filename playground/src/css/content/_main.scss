@@ -484,7 +484,7 @@ html.is-animating .transition-fade  .loader {
   min-width: 330px;
   min-height: 460px;
   white-space: initial;
-  border: 1px solid red;
+  background-color: rgba(255,255,255,0.3);
   border-radius: 20px;
 }
 
