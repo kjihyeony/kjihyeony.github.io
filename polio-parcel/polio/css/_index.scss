@@ -1,0 +1,28 @@
+/* ================= common ================= */
+html {
+  font-size: 62.5%;
+}
+html,
+body {
+  position: relative;
+  font-size: $vw-fontsize;
+  overflow-x: hidden;
+
+  // viewport fontsize, 1rem = 10px
+  @include respond-to('xlarge') {
+    font-size: $vw-fontsize-xlg;
+  }
+  // @include respond-to('large') {
+  //   font-size: $vw-fontsize-lg;
+  // }
+  @include respond-to('medium') {
+    font-size: -md;
+  }
+  @include respond-to('small') {
+    font-size: $vw-fontsize-sm;
+  }
+  @include respond-to('xsmall') {
+    font-size: 2.3866vw;
+    font-size: $vw-fontsize-xsm;
+  }
+}

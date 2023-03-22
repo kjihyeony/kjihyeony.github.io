@@ -1,0 +1,22 @@
+//color
+$primary-blue: #1D2FB9;
+
+// break point
+$xlarge: 1920;
+$xmedium: 1200;
+$small: 768;
+$xsmall: 360;
+
+$breakpoints: (
+  'xlarge': $xlarge + 'px',
+  'medium': $xmedium + 'px',
+  'small': $small + 'px',
+  'xsmall': $xsmall + 'px',
+);
+
+// root viewport fontsize, 1rem = 10px
+$vw-fontsize: 10 / 1920 * 100vw;
+$vw-fontsize-xlg: 10 / $xlarge * 100vw;
+$vw-fontsize-md: 10 / $xmedium * 100vw;
+$vw-fontsize-sm: 10 / $small * 100vw;
+$vw-fontsize-xsm: 10 / $xsmall * 100vw;

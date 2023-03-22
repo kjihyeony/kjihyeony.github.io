@@ -1,0 +1,110 @@
+/* ================= main ================= */
+.main {
+  display: flex;
+  height: 100vh;
+}
+/* ================= main - left ================= */
+.main {
+  &-wrapper {
+    position: relative;
+    width: calc( 100% - 8rem);
+  }
+  .left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    z-index: 2;
+
+    &-line {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1;
+    }
+  }
+
+  .h9figureVideo {
+    position: relative;
+    width: 70rem;
+    z-index: 2;
+    opacity: 0.5;
+
+    video{
+      width: 100%;
+    }
+  }
+
+  .h9figure{
+    position: absolute;
+    z-index: 1;
+
+    img {
+      display: block;
+    }
+  }
+}
+
+/* ================= main - right ================= */
+.main {
+  position: relative;
+  z-index: 1;
+  .right {
+    display: flex;
+    align-items: center;
+    width: 8rem;
+    padding-top: 4.5rem;
+    border-left: 1px solid $primary-blue;
+    writing-mode: tb-rl;
+
+    a {
+      font-size: 2rem;
+    }
+  }
+}
+
+/* ================= main - cursor ================= */
+#cursor {
+  position: fixed;
+  z-index: 100;
+  top: -1.5rem;
+  left: -1.5rem;
+  width: 1rem;
+  height: 1rem;
+  transform: translate(0);
+  transform-origin: 50% 50%;
+  pointer-events: none;
+
+  .sizer {
+    position: absolute;
+    z-index: 2;
+    top: -1rem;
+    left: -1rem;
+    width: 4.7rem;
+    height: 4.7rem;
+    background: #f63845;
+    border-radius: 50%;
+    // transition: background .5s cubic-bezier(.14,.99,.43,.99),-webkit-transform .5s cubic-bezier(.14,.99,.43,.99);
+    transition: transform .5s cubic-bezier(.14,.99,.43,.99),background .5s cubic-bezier(.14,.99,.43,.99);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-origin: 50% 50%;
+    transform: scale(0);
+
+    &.active {
+      transform: scale(4);
+    }
+  }
+
+}
+
+/* ================= main - copyright ================= */
+.copy {
+  position: fixed;
+  bottom: 2rem;
+  left: 3.4rem;
+  font-size: 1.4rem;
+}

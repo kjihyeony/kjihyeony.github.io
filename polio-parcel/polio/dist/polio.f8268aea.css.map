@@ -1,0 +1,1 @@
+{"version":3,"sources":["css/style.scss"],"names":[],"mappings":"AAAA,SAEI,SAAU,CACV,YAAa","file":"polio.f8268aea.css","sourceRoot":"..","sourcesContent":["body {\n  div {\n    color: red;\n    display: flex;\n  }\n}"]}

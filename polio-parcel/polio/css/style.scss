@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+//default
+@import './_reset';
+@import './_variables';
+@import './mixins/_breakpoint';
+@import './_index';
+
+//content
+@import './_main.scss'

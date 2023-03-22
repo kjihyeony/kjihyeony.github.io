@@ -1,0 +1,24 @@
+// 브레이크포인트 mixin
+
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == "xlarge" {
+    @media screen and (max-width: map-get($breakpoints, $breakpoint)) and (min-width:map-get($breakpoints, 'medium') + 1px) {
+      @content;
+    }
+  }
+  @else if $breakpoint == "medium" {
+      @media screen and (max-width: map-get($breakpoints, $breakpoint)) and (min-width:1px) {
+          @content;
+      }
+  }
+  @else if $breakpoint == "small" {
+      @media screen and (max-width: map-get($breakpoints, $breakpoint)) and (min-width:1px) {
+          @content;
+      }
+  }
+  @else if $breakpoint == "xsmall" {
+      @media screen and (max-width: map-get($breakpoints, $breakpoint)) and (min-width:1px) {
+          @content;
+      }
+  }
+}
