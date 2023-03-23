@@ -53,11 +53,6 @@
       display: block;
     }
   }
-
-  .child {
-    clip-path: ellipse(100px 100px at var(--x) var(--y));
-    display: none;
-  }
 }
 
 /* ================= main - right ================= */
