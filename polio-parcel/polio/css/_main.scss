@@ -14,7 +14,7 @@
     align-items: center;
     justify-content: center;
     height: 100%;
-    z-index: 2;
+    z-index: 3;
 
     &-line {
       position: absolute;
@@ -22,8 +22,14 @@
       left: 0;
       right: 0;
       bottom: 0;
-      z-index: 3;
-      opacity: 1;
+      z-index: 1;
+      opacity: 3;
+
+      &:hover {
+        .child {
+          display: block;
+        }
+      }
     }
   }
 
@@ -36,6 +42,7 @@
     video{
       width: 100%;
     }
+
   }
 
   .h9figure{
@@ -45,6 +52,11 @@
     img {
       display: block;
     }
+  }
+
+  .child {
+    clip-path: ellipse(100px 100px at var(--x) var(--y));
+    display: none;
   }
 }
 

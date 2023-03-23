@@ -36,3 +36,18 @@ const mainCursor = (el) => {
 
 
 mainCursor(figure);
+
+// Get element from the DOM
+const container = document.querySelector('.container');
+
+// Apply event listener
+container.addEventListener('mousemove', updateCoords, false);
+
+function updateCoords(event) {
+  // Get X and Y coordinates
+  const { offsetX, offsetY } = event;
+  
+  // Update coordinates
+  container.style.setProperty('--x', offsetX + 'px');
+  container.style.setProperty('--y', offsetY + 'px');
+}
