@@ -1,1 +1,0 @@
-{"version":3,"sources":["index.js"],"names":["require","console","log"],"mappings":";;;AAEiB,aAFjBA,QAAA,oBAEAC,QAAQC,IAAI","file":"polio.20f5703a.js","sourceRoot":"..","sourcesContent":["import './css/style.scss'\n\nconsole.log(\"dd\");"]}

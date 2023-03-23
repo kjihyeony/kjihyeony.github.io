@@ -291,13 +291,14 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 1; }
+    z-index: 3;
+    opacity: 1; }
 
 .main .h9figureVideo {
   position: relative;
   width: 70rem;
   z-index: 2;
-  opacity: 0.5; }
+  opacity: 1; }
   .main .h9figureVideo video {
     width: 100%; }
 
