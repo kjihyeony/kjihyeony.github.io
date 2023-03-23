@@ -37,17 +37,25 @@ const mainCursor = (el) => {
 
 mainCursor(figure);
 
-// Get element from the DOM
-const container = document.querySelector('.container');
 
-// Apply event listener
-container.addEventListener('mousemove', updateCoords, false);
+const mainClip = () => {
+  const container = document.querySelector('.left-line');
+  const containerCursor = document.querySelector('.h9figure-cursor-area');
 
-function updateCoords(event) {
-  // Get X and Y coordinates
-  const { offsetX, offsetY } = event;
-  
-  // Update coordinates
-  container.style.setProperty('--x', offsetX + 'px');
-  container.style.setProperty('--y', offsetY + 'px');
+  container.addEventListener('mousemove', updateCoords, false);
+
+  function updateCoords(e) {
+
+    const { offsetX, offsetY } = e;
+
+    // Update coordinates
+    container.style.setProperty('--x', offsetX + 'px');
+    container.style.setProperty('--y', offsetY + 'px');
+
+    containerCursor.addEventListener('mousemove', (e) => {
+      console.log('dd');
+    });
+  }
 }
+
+mainClip();
