@@ -15,14 +15,78 @@
   <!-- main -->
   <div class="main">
     <div class="main-wrapper">
-      <div class="left left-video">
+      <!-- <div class="left left-video">
         <div class="h9figureVideo">
           <video src="./static/video/light_animation.mp4" muted loop autoplay></video>
         </div>
-      </div>
-      <div class="left left-line">
+      </div> -->
+      <!-- <div class="left left-line">
         <div class="h9figure">
-          <img class="child" src="./static/images/line-type-bg.png" alt="">
+          <div class="child">
+            <img src="./static/images/line-type-bg.png" alt="">
+          </div>
+        </div>
+        <div class="h9figure-cursor-area">
+        </div>
+      </div> -->
+      <div class="left left-line">
+        <div class="home-hero-wrap">
+          <div class="home-hero-hover">
+            <div class="home-hero-bg"> </div>
+            <!-- link-->
+            <div role="link" tabindex="-1">
+              <div>
+                <!-- video-clip 클릭시 video-playing 클래스 추가 -->
+                <div class="video-clip" >
+                  <svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 1600 900" class="default"><rect width="100%" height="100%"></rect></svg>
+                  
+                  <div class="home-hero-text"></div>
+                              
+                  <svg xmlns="https://www.w3.org/2000/svg" class="hover">
+                    <defs>
+                      <mask class="video-mask" class="clippy">
+                        <!--  
+                          해당영역에서 마우스 포인터를 따라다님
+                        
+                        -->
+                        <g>
+                          <!-- 
+                            scale(3.2 ) => transform : scale(35.9429)
+                          -->
+                          <circle id="video-mask-circle" cx="0" cy="0" r="5.5rem" fill="white"></circle>
+                        </g>
+                      </mask>
+                    </defs>
+
+                    <!-- 
+                      마스크가 벗겨지면서 영상 or이미지가 보일곳
+                    -->
+                    <!-- hovering커서는 커지고 색도 바뀜.-->
+                    <g mask="url(#video-mask)" class="hovering-cursor">
+                      <rect x="50%" y="50%" width="200%" height="200%"></rect>
+                      <foreignObject width="100%" height="100%">
+                        <img src="./static/images/line-type-bg.png" alt="" />
+                      </foreignObject>
+                      <g class="reel-images">
+                        <foreignObject width="100%" height="100%"></foreignObject>
+                      </g>
+                    </g>
+                  </svg>
+                  <div class="video-text"></div>
+                </div>
+              </div>
+            </div>
+
+            <button type="button" class="hero-button-wrap"></button>
+
+            <div class="hero-video-mobile"> </div>
+          </div>
+          <div class="target">
+            <div class="target-l"></div>
+            <div class="target-t"></div>
+            <div class="target-r"></div>
+            <div class="target-b"></div>
+          </div>
         </div>
       </div>
     </div>
