@@ -52,10 +52,12 @@ const mainClip = () => {
     container.style.setProperty('--x', offsetX + 'px');
     container.style.setProperty('--y', offsetY + 'px');
 
-    containerCursor.addEventListener('mousemove', (e) => {
-      console.log('dd');
+    // Animate clip-path
+    gsap.to('.child', {
+      duration: 0.5,
+      clipPath: `ellipse(19rem 19rem at ${offsetX}px ${offsetY}px)`
     });
   }
-}
+};
 
 mainClip();
