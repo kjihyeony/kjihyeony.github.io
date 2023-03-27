@@ -129,7 +129,7 @@ img, svg {
 .home-hero-wrap {
   position: relative;
   z-index: 1;
-  padding: 5rem 10%;
+  // padding: 5rem 10%;
   height: 100vh;
   display: flex;
   align-items: center;
@@ -203,6 +203,9 @@ img, svg {
   left: 0;
   width: 100%;
   height: 100%;
+  background-image: url('../static/images/linetype.png');
+  background-size: cover;
+  background-position: center;
 }
 
 .video-clip .hovering-cursor rect {
@@ -224,16 +227,22 @@ img, svg {
 }
 
 .video-clip.video-playing .hovering {
-  fill: yellow
+  // fill: yellow
 }
 
 .video-clip .hovering-cursor img {
-  display: none;
   max-height: 9999px;
   transition: max-height 1s cubic-bezier(.14,.99,.43,.99);
 }
 
-.video-clip.video-playing .hovering-cursor video {
-  display: block;
-  max-height: calc(100vh - 10rem);
+// .video-clip.video-playing .hovering-cursor img {
+
+// }
+
+.video-clip .hovering-cursor rect {
+  fill: rgba(246,56,69,0);
+}
+
+.video-clip:hover .hovering-cursor rect {
+  // fill: yellow;
 }
