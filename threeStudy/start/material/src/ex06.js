@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { DoubleSide } from 'three';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls';
-
+// ----- 주제: 텍스쳐 변환
 // ----- 주제: 텍스쳐 변환
 
 export default function example() {
