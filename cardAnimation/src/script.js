@@ -1,6 +1,10 @@
 import { gsap, ScrollTrigger } from "gsap/all";
 import { CustomEase } from "gsap/all";
+import Lenis from '@studio-freight/lenis'
 gsap.registerPlugin(ScrollTrigger);
+const lenis = new Lenis();
+
+
 
 // scripts.js
 export const projects = [
@@ -92,12 +96,23 @@ document.addEventListener("DOMContentLoaded", function() {
         end: `+=${cardHeight * 6}`,
         scrub: 0.3,
         duration: 0.5,
-        markers: true
+        // markers: true
       },
       scale: () => 0.8 + i * 0.035 // 각 카드의 인덱스에 따라 스케일 값을 계산합니다.
     });
   });
   
+const lenis = new Lenis()
+
+lenis.on('scroll', (e) => {});
+
+lenis.on('scroll', ScrollTrigger.update)
+
+gsap.ticker.add((time)=>{
+  lenis.raf(time * 1000)
+})
+
+gsap.ticker.lagSmoothing(0)
 
 });
 
