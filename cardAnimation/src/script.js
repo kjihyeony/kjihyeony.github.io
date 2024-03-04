@@ -72,9 +72,34 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   // 카드 각각의 top 값을 계산하여 설정하는 코드
-  const cards = document.querySelectorAll('.cardInner');
-  cards.forEach((card, i) => {
+  const Allcards = document.querySelectorAll('.cardInner');
+  Allcards.forEach((card, i) => {
     const topValue = `calc(-5vh + ${i * 25}px)`;
     card.style.top = topValue;
+ 
   });
+
+  const cards = document.querySelectorAll('.card');
+
+  cards.forEach((card, i) => {
+    const cardInner = card.querySelector('.cardInner');
+    const cardHeight = cardInner.clientHeight; // 카드 내부의 높이를 가져옵니다
+
+    gsap.to(card.querySelector('.cardInner'), {
+      scrollTrigger: {
+        trigger: card,
+        start: 'bottom bottom',
+        end: `+=${cardHeight * 6}`,
+        scrub: 0.3,
+        duration: 0.5,
+        markers: true
+      },
+      scale: () => 0.8 + i * 0.035 // 각 카드의 인덱스에 따라 스케일 값을 계산합니다.
+    });
+  });
+  
+
 });
+
+
+
