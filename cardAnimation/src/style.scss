@@ -124,6 +124,7 @@ img {
   object-fit: cover;
 }
 
+/* lenis plugin */
 html.lenis {
   height: auto;
 }
@@ -144,11 +145,11 @@ html.lenis {
   pointer-events: none;
 }
 
-/* styles.css */
 .main {
   position: relative;
 }
 
+/* main card */
 .cardSection {
   position: relative;
   margin-top: 50vh;
@@ -167,7 +168,6 @@ html.lenis {
 
 .cardInner {
   display: flex;
-  flex-direction: column;
   position: relative;
   top: -25%;
   height: 500px;
@@ -178,6 +178,36 @@ html.lenis {
   padding: 50px;
   transform-origin: top;
   opacity: 0.4;
+}
+
+.cardCon {
+  width: 100%;
+  padding-right: 20px;
+}
+
+.card-img-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 25px;
+  overflow: hidden;
+
+  .cardInner-img {
+    width: 100%;
+    height: 100%;
+    transform: scale(1.3);
+
+    img {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      color: transparent;
+    }
+  }
 }
 
 .intro {
