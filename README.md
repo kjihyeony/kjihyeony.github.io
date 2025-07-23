@@ -1,12 +1,21 @@
-# React + Vite
+# 페이지 테스트
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React + Vite로 만든 간단한 페이지 테스트 프로젝트입니다.
 
-Currently, two official plugins are available:
+## 개발 서버 실행
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```bash
+npm install
+npm run dev
+```
 
-## Expanding the ESLint configuration
+## 빌드
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+npm run build
+```
+
+## GitHub Pages 배포
+
+이 프로젝트는 GitHub Pages로 배포됩니다.
+- 배포 URL: https://[username].github.io/kjihyeony/
