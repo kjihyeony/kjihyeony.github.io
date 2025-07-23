@@ -1,11 +1,17 @@
-import './App.css'
+import React from 'react';
+import Header from './components/Header';
+import Main from './components/Main';
+import Projects from './components/Projects';
+import './styles/main.scss';
 
 function App() {
   return (
     <div className="App">
-      <h1>페이지 테스트</h1>
+      <Header />
+      <Main />
+      <Projects />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
